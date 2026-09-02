@@ -267,6 +267,77 @@
     color:var(--slate);
   }
 
+  /* Registration form (custom, not the raw Google Forms look) */
+  .reg-form{
+    text-align:left;
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .field label{
+    display:block;
+    font-size:0.92rem;
+    font-weight:500;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .field input[type="text"],
+  .field input[type="tel"],
+  .field input[type="email"]{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    font-family:'Inter',sans-serif;
+    font-size:0.98rem;
+    color:var(--ink);
+    background:var(--paper);
+    transition:border-color .15s ease;
+  }
+  .field input:focus{
+    outline:none;
+    border-color:var(--plum);
+  }
+  .radio-group,.checkbox-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 20px;
+  }
+  .radio-group label,.checkbox-group label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.95rem;
+    font-weight:400;
+    margin-bottom:0;
+    cursor:pointer;
+  }
+  .radio-group input,.checkbox-group input{
+    accent-color:var(--plum);
+    width:16px;
+    height:16px;
+    cursor:pointer;
+  }
+  .reg-form .btn-primary{
+    align-self:flex-start;
+    border:none;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+    margin-top:6px;
+  }
+  .reg-form .btn-primary:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+  }
+  .form-status{
+    margin-top:2px;
+    font-size:0.92rem;
+    min-height:1.3em;
+  }
+  .form-status.success{color:#2F7A4D;}
+  .form-status.error{color:#B3261E;}
+
   /* Footer */
   footer{
     border-top:1px solid var(--line);
@@ -403,8 +474,61 @@
       <div class="register-card">
         <h2>Ready to start?</h2>
         <p>Fill out the short registration form and we'll be in touch to match your child with the right tutor.</p>
-        <!-- Registration form embedded directly from Google Forms -->
-        <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSeFmLwO6O4QPT3VuobOAQmcPum-oCZKbJzlT37Cu0pomCsiIA/viewform?embedded=true" width="640" height="1879" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        <!-- Custom registration form. Submissions are sent to a Google Apps Script Web App,
+             which writes them straight into the same Google Sheet as before. -->
+        <form id="regForm" class="reg-form" novalidate>
+          <div class="field">
+            <label for="fullName">Student's full name *</label>
+            <input type="text" id="fullName" name="fullName" required>
+          </div>
+          <div class="field">
+            <label for="parentName">Parent/Guardian name *</label>
+            <input type="text" id="parentName" name="parentName" required>
+          </div>
+          <div class="field">
+            <label for="contactNumber">Contact number (WhatsApp) *</label>
+            <input type="tel" id="contactNumber" name="contactNumber" required>
+          </div>
+          <div class="field">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label>Curriculum *</label>
+            <div class="radio-group">
+              <label><input type="radio" name="curriculum" value="Cambridge O Level" required> Cambridge O Level</label>
+              <label><input type="radio" name="curriculum" value="Cambridge A Level"> Cambridge A Level</label>
+              <label><input type="radio" name="curriculum" value="Cambridge IGCSE"> Cambridge IGCSE</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Subject(s) needed *</label>
+            <div class="checkbox-group" id="subjectsGroup">
+              <label><input type="checkbox" name="subjects" value="Physics"> Physics</label>
+              <label><input type="checkbox" name="subjects" value="Chemistry"> Chemistry</label>
+              <label><input type="checkbox" name="subjects" value="Mathematics"> Mathematics</label>
+              <label><input type="checkbox" name="subjects" value="Biology"> Biology</label>
+              <label><input type="checkbox" name="subjects" value="Computer Science"> Computer Science</label>
+              <label><input type="checkbox" name="subjects" value="Business Studies"> Business Studies</label>
+              <label><input type="checkbox" name="subjects" value="Economics"> Economics</label>
+              <label><input type="checkbox" name="subjects" value="Accounts"> Accounts</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Preferred days</label>
+            <div class="checkbox-group" id="daysGroup">
+              <label><input type="checkbox" name="days" value="Monday"> Monday</label>
+              <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+              <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+              <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+              <label><input type="checkbox" name="days" value="Friday"> Friday</label>
+              <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
+              <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" id="submitBtn">Submit registration</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
         <p class="register-note">Prefer WhatsApp? Message us at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
       </div>
     </div>
@@ -428,6 +552,59 @@
   const navLinks = document.getElementById('navLinks');
   menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ---------- Registration form ----------
+  // PASTE the Web App URL from your Apps Script deployment here (see setup guide):
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybEdlpGuNDrp62TZemO7RaQxDHiubP3fzzpViJhr8UuFejWCeU_C--TNjPSAjis87K7g/exec';
+
+  const regForm = document.getElementById('regForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+
+  regForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const subjects = Array.from(regForm.querySelectorAll('input[name="subjects"]:checked')).map(el => el.value);
+    const days = Array.from(regForm.querySelectorAll('input[name="days"]:checked')).map(el => el.value);
+    const curriculumEl = regForm.querySelector('input[name="curriculum"]:checked');
+
+    if (!curriculumEl || subjects.length === 0) {
+      formStatus.textContent = 'Please choose a curriculum and at least one subject.';
+      formStatus.className = 'form-status error';
+      return;
+    }
+
+    const data = {
+      fullName: document.getElementById('fullName').value,
+      parentName: document.getElementById('parentName').value,
+      contactNumber: document.getElementById('contactNumber').value,
+      email: document.getElementById('email').value,
+      curriculum: curriculumEl.value,
+      subjects: subjects,
+      days: days
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    formStatus.textContent = '';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    }).then(function () {
+      formStatus.textContent = "Thanks! We've received your registration and will be in touch soon.";
+      formStatus.className = 'form-status success';
+      regForm.reset();
+    }).catch(function () {
+      formStatus.textContent = 'Something went wrong sending that. Please try again or message us on WhatsApp.';
+      formStatus.className = 'form-status error';
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit registration';
+    });
+  });
 </script>
 
 </body>

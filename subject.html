@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course — TAG Educators</title>
+<meta name="description" content="Meet your tutor and register for one-to-one Cambridge tutoring with TAG Educators.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .subject-hero{
+    padding:150px 0 60px;
+    text-align:center;
+  }
+  .back-link{
+    display:inline-block;
+    margin-bottom:22px;
+    font-size:0.9rem;
+    color:var(--text-muted);
+    text-decoration:none;
+  }
+  .back-link:hover{color:var(--plum-glow);}
+  .subject-hero h1{font-size:2.6rem;}
+  .subject-hero .tags{
+    margin-top:14px;
+    font-size:0.95rem;
+    color:var(--text-muted);
+  }
+
+  /* Tutor card */
+  .tutor-card{
+    display:flex;
+    align-items:flex-start;
+    gap:24px;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:32px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .tutor-avatar{
+    flex-shrink:0;
+    width:64px;height:64px;
+    border-radius:50%;
+    background:rgba(180,127,194,0.14);
+    color:var(--plum-glow);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tutor-label{
+    display:block;
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--plum-glow);
+    margin-bottom:6px;
+  }
+  .tutor-card h3{font-size:1.2rem;margin-bottom:10px;}
+  .tutor-card p{font-size:0.96rem;}
+
+  /* Batches */
+  .batches-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .batch-card{
+    border:1px solid var(--line);
+    background:var(--bg-panel);
+    padding:26px 22px;
+    text-align:center;
+  }
+  .batch-card h3{font-size:1.05rem;margin-bottom:8px;}
+  .batch-card p{font-size:0.92rem;}
+  .batches-note{
+    text-align:center;
+    font-size:0.85rem;
+    color:var(--text-muted);
+    margin-top:20px;
+  }
+
+  /* Registration */
+  .register-card{
+    border:1px solid var(--line);
+    background:var(--bg-panel);
+    padding:48px 40px;
+    text-align:center;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .register-card h2{font-size:1.7rem;}
+  .register-card > p{margin-top:14px;font-size:1.02rem;}
+  .subject-pill{
+    display:inline-block;
+    margin-top:18px;
+    padding:8px 18px;
+    border-radius:20px;
+    background:rgba(180,127,194,0.14);
+    color:var(--plum-glow);
+    font-size:0.9rem;
+    font-weight:500;
+  }
+  .register-note{margin-top:18px;font-size:0.88rem;color:var(--text-muted);}
+  .reg-form{text-align:left;margin-top:28px;display:flex;flex-direction:column;gap:20px;}
+  .field label{display:block;font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:8px;}
+  .field input[type="text"],
+  .field input[type="tel"],
+  .field input[type="email"]{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid var(--line-strong);
+    border-radius:3px;
+    font-family:'Inter',sans-serif;
+    font-size:0.98rem;
+    color:var(--text);
+    background:var(--bg);
+    transition:border-color .15s ease;
+  }
+  .field input:focus{outline:none;border-color:var(--plum-glow);}
+  .radio-group,.checkbox-group{display:flex;flex-wrap:wrap;gap:10px 20px;}
+  .radio-group label,.checkbox-group label{
+    display:flex;align-items:center;gap:8px;
+    font-size:0.95rem;font-weight:400;margin-bottom:0;cursor:pointer;color:var(--text);
+  }
+  .radio-group input,.checkbox-group input{accent-color:var(--plum-glow);width:16px;height:16px;cursor:pointer;}
+  .reg-form .btn-primary{align-self:flex-start;margin-top:6px;}
+  .form-status{margin-top:2px;font-size:0.92rem;min-height:1.3em;}
+  .form-status.success{color:#8FD19E;}
+  .form-status.error{color:#E38B87;}
+
+  @media (max-width:900px){.batches-grid{grid-template-columns:1fr;}}
+  @media (max-width:640px){
+    .subject-hero{padding:120px 0 40px;}
+    .subject-hero h1{font-size:2rem;}
+    .tutor-card{flex-direction:column;text-align:center;align-items:center;}
+    .register-card{padding:32px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="TAG Educators logo">
+      <span>TAG Educators</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#courses">Courses</a></li>
+      <li><a href="index.html#why">Why TAG</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="index.html#courses" class="nav-cta">All Courses</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= SUBJECT HERO ================= -->
+  <section class="subject-hero">
+    <div class="wrap">
+      <a href="index.html#courses" class="back-link">← All courses</a>
+      <h1 id="subjectTitle">Subject</h1>
+      <p class="tags">O Level · A Level · IGCSE</p>
+    </div>
+  </section>
+
+  <!-- ================= TUTOR ================= -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="tutor-card reveal">
+        <div class="tutor-avatar">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.6"/></svg>
+        </div>
+        <div>
+          <span class="tutor-label">Your tutor for <span id="subjectNameInline">this subject</span></span>
+          <h3>Profile coming soon</h3>
+          <p>We're finalizing tutor profiles for this subject. Message us on WhatsApp for background and credentials in the meantime, and we'll have this page updated shortly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BATCHES ================= -->
+  <!-- PLACEHOLDER: example batch timings — replace with the real, current schedule for this subject. -->
+  <section>
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Currently offered</span>
+        <h2>Available batches</h2>
+      </div>
+      <div class="batches-grid reveal-stagger">
+        <div class="batch-card reveal">
+          <h3>Batch A</h3>
+          <p>Weekday evenings</p>
+        </div>
+        <div class="batch-card reveal">
+          <h3>Batch B</h3>
+          <p>Weekend mornings</p>
+        </div>
+        <div class="batch-card reveal">
+          <h3>Batch C</h3>
+          <p>Flexible, on request</p>
+        </div>
+      </div>
+      <p class="batches-note">Timings shown are indicative — confirm exact slots on WhatsApp before registering.</p>
+    </div>
+  </section>
+
+  <!-- ================= REGISTRATION ================= -->
+  <section id="register">
+    <div class="wrap">
+      <div class="register-card reveal">
+        <h2>Register for this course</h2>
+        <p>Fill out the short form and we'll be in touch to confirm your child's spot.</p>
+        <span class="subject-pill" id="subjectPill">Subject</span>
+
+        <form id="regForm" class="reg-form" novalidate>
+          <input type="hidden" id="subjectField" name="subjectField" value="">
+          <div class="field">
+            <label for="fullName">Student's full name *</label>
+            <input type="text" id="fullName" name="fullName" required>
+          </div>
+          <div class="field">
+            <label for="parentName">Parent/Guardian name *</label>
+            <input type="text" id="parentName" name="parentName" required>
+          </div>
+          <div class="field">
+            <label for="contactNumber">Contact number (WhatsApp) *</label>
+            <input type="tel" id="contactNumber" name="contactNumber" required>
+          </div>
+          <div class="field">
+            <label for="email">Email address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label>Curriculum *</label>
+            <div class="radio-group">
+              <label><input type="radio" name="curriculum" value="Cambridge O Level" required> Cambridge O Level</label>
+              <label><input type="radio" name="curriculum" value="Cambridge A Level"> Cambridge A Level</label>
+              <label><input type="radio" name="curriculum" value="Cambridge IGCSE"> Cambridge IGCSE</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Preferred days</label>
+            <div class="checkbox-group" id="daysGroup">
+              <label><input type="checkbox" name="days" value="Monday"> Monday</label>
+              <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+              <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+              <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+              <label><input type="checkbox" name="days" value="Friday"> Friday</label>
+              <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
+              <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" id="submitBtn">Submit registration</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+        <p class="register-note">Prefer WhatsApp? Message us at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <img src="logo.png" alt="TAG Educators logo" style="height:36px;width:36px;">
+          <span>TAG Educators</span>
+        </a>
+        <p>Premium Cambridge O Level, A Level and IGCSE tutoring — one-to-one, wherever you are.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#courses">Courses</a></li>
+          <li><a href="index.html#why">Why TAG</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/923162165779" target="_blank" rel="noopener">WhatsApp: +92 316 216 5779</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">The Ark Global Educators &copy; <span id="year"></span>. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // ---------- Read subject from the URL (?subject=Physics) ----------
+  var params = new URLSearchParams(window.location.search);
+  var subject = params.get('subject') || 'This Subject';
+
+  document.getElementById('subjectTitle').textContent = subject;
+  document.getElementById('subjectNameInline').textContent = subject;
+  document.getElementById('subjectPill').textContent = 'Registering for: ' + subject;
+  document.getElementById('subjectField').value = subject;
+  document.title = subject + ' — TAG Educators';
+
+  // ---------- Registration form ----------
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybEdlpGuNDrp62TZemO7RaQxDHiubP3fzzpViJhr8UuFejWCeU_C--TNjPSAjis87K7g/exec';
+
+  var regForm = document.getElementById('regForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var formStatus = document.getElementById('formStatus');
+
+  regForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var days = Array.from(regForm.querySelectorAll('input[name="days"]:checked')).map(function (el) { return el.value; });
+    var curriculumEl = regForm.querySelector('input[name="curriculum"]:checked');
+
+    if (!curriculumEl) {
+      formStatus.textContent = 'Please choose a curriculum.';
+      formStatus.className = 'form-status error';
+      return;
+    }
+
+    var data = {
+      fullName: document.getElementById('fullName').value,
+      parentName: document.getElementById('parentName').value,
+      contactNumber: document.getElementById('contactNumber').value,
+      email: document.getElementById('email').value,
+      curriculum: curriculumEl.value,
+      subjects: [subject],
+      days: days
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    formStatus.textContent = '';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    }).then(function () {
+      formStatus.textContent = "Thanks! We've received your registration and will be in touch soon.";
+      formStatus.className = 'form-status success';
+      regForm.reset();
+    }).catch(function () {
+      formStatus.textContent = 'Something went wrong sending that. Please try again or message us on WhatsApp.';
+      formStatus.className = 'form-status error';
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit registration';
+    });
+  });
+</script>
+
+</body>
+</html>

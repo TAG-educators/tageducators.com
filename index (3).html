@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG Educators — The Ark Global Educators</title>
+<meta name="description" content="Premium Cambridge O Level, A Level and IGCSE tutoring, taught one-to-one, wherever you are.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    padding:120px 0 80px;
+    overflow:hidden;
+  }
+  .hero-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse at 50% 30%, rgba(90,42,100,0.35), transparent 65%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero-content{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .hero h1{
+    font-size:3.2rem;
+    letter-spacing:-0.01em;
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:1.15rem;
+    max-width:52ch;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .scroll-cue{
+    margin:56px auto 0;
+    width:26px;
+    height:42px;
+    border:2px solid var(--line-strong);
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    padding-top:8px;
+  }
+  .scroll-cue span{
+    width:4px;
+    height:8px;
+    border-radius:2px;
+    background:var(--plum-glow);
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .scroll-cue span{animation:cue 1.8s ease-in-out infinite;}
+    @keyframes cue{
+      0%{transform:translateY(0);opacity:1;}
+      70%{transform:translateY(10px);opacity:0;}
+      71%{transform:translateY(0);opacity:0;}
+      100%{transform:translateY(0);opacity:1;}
+    }
+  }
+
+  /* ---------- Courses catalogue ---------- */
+  .subjects-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  .subject-card{
+    border:1px solid var(--line);
+    background:var(--bg-panel);
+    padding:26px 22px;
+    text-decoration:none;
+    display:block;
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .subject-card:hover{
+    border-color:var(--plum-glow);
+    background:var(--bg-panel-2);
+    transform:translateY(-4px);
+    box-shadow:0 20px 36px -24px rgba(180,127,194,0.35);
+  }
+  .subject-card .icon{
+    width:42px;height:42px;border-radius:10px;
+    background:rgba(180,127,194,0.14);
+    color:var(--plum-glow);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .subject-card h3{font-size:1.05rem;font-weight:600;margin-bottom:6px;color:var(--text);}
+  .subject-card .tags{font-size:0.82rem;color:var(--text-muted);margin-bottom:14px;}
+  .subject-card .link-out{font-size:0.88rem;color:var(--plum-glow);font-weight:500;}
+
+  /* ---------- FAQ / Why choose ---------- */
+  .faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    max-width:760px;
+    margin:0 auto;
+  }
+  .faq-item{background:var(--bg-panel);}
+  .faq-q{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    color:var(--text);
+    font-family:'Source Serif 4',serif;
+    font-size:1.08rem;
+    font-weight:600;
+    padding:22px 26px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .faq-q .plus{
+    flex-shrink:0;
+    width:22px;height:22px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--plum-glow);
+    transition:transform .25s ease;
+  }
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-a p{padding:0 26px 22px;font-size:0.98rem;}
+  .faq-item.open .faq-a{max-height:200px;}
+
+  /* ---------- Stats ---------- */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stat-card{
+    background:var(--bg-panel);
+    padding:36px 24px;
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Source Serif 4',serif;
+    font-size:2.6rem;
+    font-weight:700;
+    color:var(--plum-glow);
+  }
+  .stat-label{
+    margin-top:8px;
+    font-size:0.9rem;
+    color:var(--text-muted);
+  }
+  .stats-note{
+    text-align:center;
+    font-size:0.82rem;
+    color:var(--text-muted);
+    margin-top:20px;
+    opacity:0.7;
+  }
+
+  @media (max-width:900px){
+    .subjects-grid{grid-template-columns:repeat(2,1fr);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .hero h1{font-size:2.1rem;}
+    .hero{min-height:auto;padding:80px 0 56px;}
+    .subjects-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="brand">
+      <img src="logo.png" alt="TAG Educators logo">
+      <span>TAG Educators</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#why">Why TAG</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="#courses" class="nav-cta">View Courses</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="heroSection">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-content wrap">
+      <span class="eyebrow">Welcome to TAG Educators</span>
+      <h1>Cambridge tutoring that actually <span class="accent">connects</span>.</h1>
+      <p class="hero-sub">TAG Educators pairs Cambridge-aligned tutors with O Level, A Level and IGCSE students around the world — one subject, one student, at a time.</p>
+      <div class="scroll-cue"><span></span></div>
+    </div>
+  </section>
+
+  <!-- ================= COURSES CATALOGUE ================= -->
+  <section id="courses">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Our courses</span>
+        <h2>Subjects we teach</h2>
+        <p>Pick a subject to meet the tutor and see which batches are currently running.</p>
+      </div>
+      <div class="subjects-grid reveal-stagger">
+
+        <a class="subject-card reveal" href="subject.html?subject=Physics">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(120 12 12)"/></svg></div>
+          <h3>Physics</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Chemistry">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 3h6M10 3v5l-5.5 9c-.8 1.4.2 3 1.8 3h11.4c1.6 0 2.6-1.6 1.8-3L14 8V3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 15h8" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3>Chemistry</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Mathematics">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 6h14M9 6c0 6-2 11-4 12M13 6c1.5 3 1 8 3 12M8 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Mathematics</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Biology">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-3.5-7-7.5-7-11.5A7 7 0 0112 3a7 7 0 017 6.5C19 13.5 16 17.5 12 21z" stroke="currentColor" stroke-width="1.6"/><path d="M12 21V10" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3>Biology</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Computer+Science">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Computer Science</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Business+Studies">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="8" width="17" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8V6.5A1.5 1.5 0 0110 5h4a1.5 1.5 0 011.5 1.5V8" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h3>Business Studies</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Economics">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V9M10 19V5M16 19v-7M20 19V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>Economics</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+        <a class="subject-card reveal" href="subject.html?subject=Accounts">
+          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h7M8.5 11.5h7M8.5 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h3>Accounts</h3>
+          <p class="tags">O Level · A Level · IGCSE</p>
+          <span class="link-out">View course →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY TAG / FAQ ================= -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Common questions</span>
+        <h2>Why families choose TAG</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Why choose TAG Educators?
+            <span class="plus"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-a"><p>Every tutor teaches within their own specialism and has actually sat these exact Cambridge papers — not a generalist matched to a subject list.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Are sessions really one-to-one?
+            <span class="plus"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-a"><p>Yes — every session is a single tutor working with a single student, live and fully online.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Which curricula do you cover?
+            <span class="plus"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-a"><p>Cambridge O Level, A Level and IGCSE, mapped to the current syllabus for each subject.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            Can we schedule around time zones?
+            <span class="plus"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-a"><p>Yes — sessions run fully online, so timing is built around what works for your family, wherever you are.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            How do I register my child?
+            <span class="plus"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-a"><p>Browse the subjects above — each one takes you to that tutor's page, where you can see current course timings and register directly.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <!-- PLACEHOLDER DATA: hypothetical numbers so Sherry can see the layout.
+       Replace data-target values below with real, verified figures before treating this as live/public claims. -->
+  <section id="stats">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Our track record</span>
+        <h2>Results so far</h2>
+      </div>
+      <div class="stats-grid reveal-stagger">
+        <div class="stat-card reveal">
+          <div class="stat-num" data-target="100">0</div>
+          <div class="stat-label">Students Taught</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-target="40">0</div>
+          <div class="stat-label">Achieved A*</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-target="50">0</div>
+          <div class="stat-label">Achieved A</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-num" data-target="10">0</div>
+          <div class="stat-label">Achieved B</div>
+        </div>
+      </div>
+      <p class="stats-note">Sample figures shown for layout — to be replaced with verified results.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <img src="logo.png" alt="TAG Educators logo" style="height:36px;width:36px;">
+          <span>TAG Educators</span>
+        </a>
+        <p>Premium Cambridge O Level, A Level and IGCSE tutoring — one-to-one, wherever you are.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#why">Why TAG</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/923162165779" target="_blank" rel="noopener">WhatsApp: +92 316 216 5779</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">The Ark Global Educators &copy; <span id="year"></span>. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // ---------- FAQ accordion ----------
+  document.querySelectorAll('.faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ---------- Stat counters (trigger once visible) ----------
+  const statEls = document.querySelectorAll('.stat-num');
+  if ('IntersectionObserver' in window && statEls.length) {
+    const statIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        statIO.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    statEls.forEach(function (el) { statIO.observe(el); });
+  } else {
+    statEls.forEach(function (el) { el.textContent = el.getAttribute('data-target'); });
+  }
+
+  // ---------- Hero particle network ----------
+  (function () {
+    const canvas = document.getElementById('heroCanvas');
+    const heroSection = document.getElementById('heroSection');
+    if (!canvas || !heroSection) return;
+    const ctx = canvas.getContext('2d');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let w, h, particles = [];
+    const COUNT = 55;
+    const MAX_DIST = 130;
+    const mouse = { x: null, y: null, active: false };
+
+    function resize() {
+      w = canvas.width = heroSection.clientWidth;
+      h = canvas.height = heroSection.clientHeight;
+    }
+    function makeParticles() {
+      particles = [];
+      for (let i = 0; i < COUNT; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35
+        });
+      }
+    }
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+
+      particles.forEach(function (p) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        if (mouse.active) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            const force = (120 - dist) / 120 * 0.6;
+            p.x += (dx / (dist || 1)) * force;
+            p.y += (dy / (dist || 1)) * force;
+          }
+        }
+      });
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            ctx.strokeStyle = 'rgba(180,127,194,' + (0.22 * (1 - dist / MAX_DIST)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(function (p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(246,241,248,0.55)';
+        ctx.fill();
+      });
+
+      if (!reduced) requestAnimationFrame(step);
+    }
+
+    resize();
+    makeParticles();
+    window.addEventListener('resize', function () { resize(); makeParticles(); });
+    heroSection.addEventListener('mousemove', function (e) {
+      const rect = heroSection.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+    heroSection.addEventListener('mouseleave', function () { mouse.active = false; });
+
+    if (reduced) {
+      step(); // draw a single static frame, no loop
+    } else {
+      requestAnimationFrame(step);
+    }
+  })();
+</script>
+
+</body>
+</html>

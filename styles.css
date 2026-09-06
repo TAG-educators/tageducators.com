@@ -161,6 +161,53 @@ footer{
   text-align:center;
 }
 
+/* ---------- Page transition (sunset / sunrise) ---------- */
+#pageTransition{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  overflow:hidden;
+  background:var(--bg);
+  display:block;
+  opacity:1;
+}
+#pageTransition::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse 60% 45% at 50% 50%, var(--plum-glow), transparent 70%);
+  opacity:0.18;
+}
+#pageTransition .pt-horizon{
+  position:absolute;
+  left:0; right:0; top:50%;
+  height:1px;
+  background:rgba(255,255,255,0.22);
+}
+#pageTransition .pt-ground{
+  position:absolute;
+  left:0; right:0; top:50%; bottom:0;
+  background-image:repeating-linear-gradient(to bottom, rgba(255,255,255,0.07) 0, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 34px);
+  opacity:0.5;
+}
+#pageTransition .pt-sun{
+  position:absolute;
+  left:50%; top:50%;
+  width:170px; height:170px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--plum-glow) 0%, var(--plum-glow) 35%, transparent 70%);
+  box-shadow:0 0 100px 40px var(--plum-glow);
+  transform:translate(-50%,-50%) translateY(220px);
+  transition:transform .75s cubic-bezier(.65,0,.35,1);
+}
+#pageTransition.pt-rise .pt-sun{
+  transform:translate(-50%,-50%) translateY(-60px);
+}
+@media (prefers-reduced-motion: reduce){
+  #pageTransition .pt-sun{transition:none;}
+}
+
 /* ---------- Mobile ---------- */
 @media (max-width:640px){
   .nav-links{

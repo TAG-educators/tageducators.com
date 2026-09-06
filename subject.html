@@ -138,8 +138,43 @@
     .register-card{padding:32px 24px;}
   }
 </style>
+
+<script>
+  // Set this subject's theme colors on :root BEFORE paint, so there's no
+  // flash of the default brand color when the page first loads.
+  (function () {
+    var THEMES = {
+      'Physics':            { bg:'#0E1730', panel:'#16234A', panel2:'#1C2C5B', glow:'#6FA8FF', btn:'#2F5FD1' },
+      'Chemistry':          { bg:'#0A2A20', panel:'#123B2C', panel2:'#164A37', glow:'#4ADE9B', btn:'#1F8F5F' },
+      'Mathematics':        { bg:'#1A1740', panel:'#262058', panel2:'#312A6E', glow:'#A78BFA', btn:'#6D4FD1' },
+      'Biology':            { bg:'#0A2B2B', panel:'#123D3D', panel2:'#164C4C', glow:'#4DD9C7', btn:'#1F9E8F' },
+      'Computer Science':   { bg:'#08262E', panel:'#103642', panel2:'#134454', glow:'#4DD8EF', btn:'#1690AC' },
+      'Business Studies':   { bg:'#2E2208', panel:'#3F2F0C', panel2:'#4E3B0F', glow:'#FFC94D', btn:'#C68A1A' },
+      'Economics':          { bg:'#2E0E16', panel:'#401322', panel2:'#50172B', glow:'#FF7A93', btn:'#C23A57' },
+      'Accounts':           { bg:'#301708', panel:'#40200C', panel2:'#4F280F', glow:'#FFA45C', btn:'#C9631E' }
+    };
+    var params = new URLSearchParams(window.location.search);
+    var subject = params.get('subject') || '';
+    var theme = THEMES[subject];
+    if (theme) {
+      var root = document.documentElement.style;
+      root.setProperty('--bg', theme.bg);
+      root.setProperty('--bg-panel', theme.panel);
+      root.setProperty('--bg-panel-2', theme.panel2);
+      root.setProperty('--plum-glow', theme.glow);
+      root.setProperty('--plum', theme.btn);
+      root.setProperty('--plum-light', theme.glow);
+    }
+  })();
+</script>
 </head>
 <body>
+
+<div id="pageTransition" aria-hidden="true">
+  <div class="pt-ground"></div>
+  <div class="pt-horizon"></div>
+  <div class="pt-sun"></div>
+</div>
 
 <header>
   <nav>
@@ -149,11 +184,11 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#courses">Courses</a></li>
+      <li><a href="courses.html">Courses</a></li>
       <li><a href="index.html#why">Why TAG</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <a href="index.html#courses" class="nav-cta">All Courses</a>
+    <a href="courses.html" class="nav-cta">All Courses</a>
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -165,7 +200,7 @@
   <!-- ================= SUBJECT HERO ================= -->
   <section class="subject-hero">
     <div class="wrap">
-      <a href="index.html#courses" class="back-link">← All courses</a>
+      <a href="courses.html" class="back-link">← All courses</a>
       <h1 id="subjectTitle">Subject</h1>
       <p class="tags">O Level · A Level · IGCSE</p>
     </div>
@@ -283,7 +318,7 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="index.html#courses">Courses</a></li>
+          <li><a href="courses.html">Courses</a></li>
           <li><a href="index.html#why">Why TAG</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -300,6 +335,7 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="transitions.js"></script>
 <script>
   // ---------- Read subject from the URL (?subject=Physics) ----------
   var params = new URLSearchParams(window.location.search);

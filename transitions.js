@@ -7,6 +7,7 @@
   if (!overlay) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FLAG = 'tagPageTransitionPending';
 
   function playEntry() {
     overlay.style.transition = '';
@@ -50,6 +51,7 @@
       overlay.classList.remove('pt-rise'); // sun sets
     });
 
+    sessionStorage.setItem(FLAG, '1');
     setTimeout(function () {
       window.location.href = href;
     }, 760);
@@ -58,14 +60,21 @@
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a');
     if (!link) return;
+    if (link.classList.contains('learn-more')) return; // handled by the course-glow transition
     var href = link.getAttribute('href');
     if (!href || href.charAt(0) === '#') return;
     if (link.target === '_blank') return;
     if (/^https?:\/\//i.test(href)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
+    if (reduced) { window.location.href = href; return; }
     playExitThenGo(href);
   });
 
-  window.addEventListener('pageshow', playEntry);
+  window.addEventListener('pageshow', function () {
+    if (sessionStorage.getItem(FLAG) === '1') {
+      sessionStorage.removeItem(FLAG);
+      playEntry();
+    }
+  });
 })();

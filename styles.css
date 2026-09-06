@@ -169,8 +169,8 @@ footer{
   pointer-events:none;
   overflow:hidden;
   background:var(--bg);
-  display:block;
-  opacity:1;
+  display:none;
+  opacity:0;
 }
 #pageTransition::before{
   content:"";

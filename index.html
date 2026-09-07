@@ -4,173 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAG Educators — The Ark Global Educators</title>
-<meta name="description" content="Premium Cambridge O Level, A Level and IGCSE tutoring, taught one-to-one, wherever you are.">
+<meta name="description" content="One-to-one Cambridge O Level, A Level and IGCSE tutoring, taught by specialist tutors who've sat these exact exams.">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative;
-    min-height:92vh;
-    display:flex;
-    align-items:center;
-    padding:120px 0 80px;
-    overflow:hidden;
-  }
-  .hero-canvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-  }
-  .hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(ellipse at 50% 30%, rgba(90,42,100,0.35), transparent 65%);
-    pointer-events:none;
-    z-index:0;
-  }
-  .hero-content{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    max-width:760px;
-    margin:0 auto;
-  }
-  .hero h1{
-    font-size:3.2rem;
-    letter-spacing:-0.01em;
-  }
-  .hero-sub{
-    margin-top:22px;
-    font-size:1.15rem;
-    max-width:52ch;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .scroll-cue{
-    margin:56px auto 0;
-    width:26px;
-    height:42px;
-    border:2px solid var(--line-strong);
-    border-radius:14px;
-    display:flex;
-    justify-content:center;
-    padding-top:8px;
-  }
-  .scroll-cue span{
-    width:4px;
-    height:8px;
-    border-radius:2px;
-    background:var(--plum-glow);
-  }
-  @media (prefers-reduced-motion: no-preference){
-    .scroll-cue span{animation:cue 1.8s ease-in-out infinite;}
-    @keyframes cue{
-      0%{transform:translateY(0);opacity:1;}
-      70%{transform:translateY(10px);opacity:0;}
-      71%{transform:translateY(0);opacity:0;}
-      100%{transform:translateY(0);opacity:1;}
-    }
-  }
-
-  /* ---------- FAQ / Why choose ---------- */
-  .faq-list{
-    display:flex;
-    flex-direction:column;
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    max-width:760px;
-    margin:0 auto;
-  }
-  .faq-item{background:var(--bg-panel);}
-  .faq-q{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    color:var(--text);
-    font-family:'Source Serif 4',serif;
-    font-size:1.08rem;
-    font-weight:600;
-    padding:22px 26px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-  }
-  .faq-q .plus{
-    flex-shrink:0;
-    width:22px;height:22px;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--plum-glow);
-    transition:transform .25s ease;
-  }
-  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
-  .faq-a{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .3s ease;
-  }
-  .faq-a p{padding:0 26px 22px;font-size:0.98rem;}
-  .faq-item.open .faq-a{max-height:200px;}
-
-  /* ---------- Stats ---------- */
-  .stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-  }
-  .stat-card{
-    background:var(--bg-panel);
-    padding:36px 24px;
-    text-align:center;
-  }
-  .stat-num{
-    font-family:'Source Serif 4',serif;
-    font-size:2.6rem;
-    font-weight:700;
-    color:var(--plum-glow);
-  }
-  .stat-label{
-    margin-top:8px;
-    font-size:0.9rem;
-    color:var(--text-muted);
-  }
-  .stats-note{
-    text-align:center;
-    font-size:0.82rem;
-    color:var(--text-muted);
-    margin-top:20px;
-    opacity:0.7;
-  }
-
-  @media (max-width:900px){
-    .stats-grid{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:640px){
-    .hero h1{font-size:2.1rem;}
-    .hero{min-height:auto;padding:80px 0 56px;}
-    .stats-grid{grid-template-columns:1fr;}
-  }
-</style>
+<script>
+(function(){try{var c=sessionStorage.getItem('tagTransitionColor');if(c){document.documentElement.classList.add('tag-arriving');document.documentElement.style.setProperty('--arrive-color',c);}}catch(e){}})();
+</script>
 </head>
 <body>
 
-<div id="pageTransition" aria-hidden="true">
-  <div class="pt-ground"></div>
-  <div class="pt-horizon"></div>
-  <div class="pt-sun"></div>
-</div>
+<div id="tagTransition" aria-hidden="true"><canvas id="tagTransitionCanvas"></canvas></div>
 
 <header>
   <nav>
@@ -197,21 +43,62 @@
   <section class="hero" id="heroSection">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-content wrap">
-      <span class="eyebrow">Welcome to TAG Educators</span>
-      <h1>Cambridge tutoring that actually <span class="accent">connects</span>.</h1>
-      <p class="hero-sub">TAG Educators pairs Cambridge-aligned tutors with O Level, A Level and IGCSE students around the world — one subject, one student, at a time.</p>
-      <div class="scroll-cue"><span></span></div>
+      <svg class="arc-mark load-in" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+      <h1 class="load-in d1">Taught by someone who's already sat this exact exam.</h1>
+      <p class="hero-sub load-in d2">TAG Educators matches O Level, A Level and IGCSE students with specialist, one-to-one tutors — live online, wherever in the world you are.</p>
+      <div class="btn-row load-in d3">
+        <a href="courses.html" class="btn-primary">View courses</a>
+        <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-secondary">Message on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ORBIT STRIP ================= -->
+  <section id="orbit">
+    <div class="wrap">
+      <div class="orbit-head">
+        <h2>Every subject, its own tutor</h2>
+        <a href="courses.html">See all courses
+          <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+        </a>
+      </div>
+      <div class="orbit-track" id="orbitTrack"></div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Getting started takes three steps</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num">01</span>
+          <h3>Browse a subject</h3>
+          <p>Each subject page shows its tutor, current batch timings and a short registration form.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h3>Register or message us</h3>
+          <p>Fill the form, or message us on WhatsApp first if you'd rather ask questions before registering.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h3>Start one-to-one sessions</h3>
+          <p>Sessions run live online, scheduled around your family's time zone and week.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ================= WHY TAG / FAQ ================= -->
   <section id="why">
     <div class="wrap">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Common questions</span>
-        <h2>Why families choose TAG</h2>
+      <div class="section-head center">
+        <h2>Questions parents usually ask</h2>
       </div>
-      <div class="faq-list reveal" id="faqList">
+      <div class="faq-list" id="faqList">
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
             Why choose TAG Educators?
@@ -252,33 +139,44 @@
   </section>
 
   <!-- ================= STATS ================= -->
-  <!-- PLACEHOLDER DATA: hypothetical numbers so Sherry can see the layout.
-       Replace data-target values below with real, verified figures before treating this as live/public claims. -->
+  <!-- PLACEHOLDER DATA: hypothetical numbers so the layout can be reviewed.
+       Replace data-target values below with real, verified figures before treating this as a live/public claim. -->
   <section id="stats">
     <div class="wrap">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Our track record</span>
+      <div class="section-head center">
         <h2>Results so far</h2>
       </div>
-      <div class="stats-grid reveal-stagger">
-        <div class="stat-card reveal">
+      <div class="stats-grid">
+        <div class="stat-card">
           <div class="stat-num" data-target="100">0</div>
           <div class="stat-label">Students Taught</div>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card">
           <div class="stat-num" data-target="40">0</div>
           <div class="stat-label">Achieved A*</div>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card">
           <div class="stat-num" data-target="50">0</div>
           <div class="stat-label">Achieved A</div>
         </div>
-        <div class="stat-card reveal">
+        <div class="stat-card">
           <div class="stat-num" data-target="10">0</div>
           <div class="stat-label">Achieved B</div>
         </div>
       </div>
       <p class="stats-note">Sample figures shown for layout — to be replaced with verified results.</p>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Ready to find your tutor?</h2>
+      <p>Message us your subject and level on WhatsApp, or browse courses to see current batches.</p>
+      <div class="btn-row">
+        <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-primary">Message on WhatsApp</a>
+        <a href="courses.html" class="btn-secondary">View courses</a>
+      </div>
     </div>
   </section>
 
@@ -314,50 +212,10 @@
   </div>
 </footer>
 
+<script src="subjects-data.js"></script>
 <script src="main.js"></script>
 <script src="transitions.js"></script>
 <script>
-  // ---------- FAQ accordion ----------
-  document.querySelectorAll('.faq-q').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      const item = btn.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
-        openItem.classList.remove('open');
-        openItem.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  // ---------- Stat counters (trigger once visible) ----------
-  const statEls = document.querySelectorAll('.stat-num');
-  if ('IntersectionObserver' in window && statEls.length) {
-    const statIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-        const duration = 1200;
-        const start = performance.now();
-        function tick(now) {
-          const progress = Math.min((now - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.round(eased * target);
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-        statIO.unobserve(el);
-      });
-    }, { threshold: 0.4 });
-    statEls.forEach(function (el) { statIO.observe(el); });
-  } else {
-    statEls.forEach(function (el) { el.textContent = el.getAttribute('data-target'); });
-  }
-
   // ---------- Hero particle network ----------
   (function () {
     const canvas = document.getElementById('heroCanvas');
@@ -444,7 +302,7 @@
     heroSection.addEventListener('mouseleave', function () { mouse.active = false; });
 
     if (reduced) {
-      step(); // draw a single static frame, no loop
+      step();
     } else {
       requestAnimationFrame(step);
     }

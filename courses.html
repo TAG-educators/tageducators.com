@@ -10,80 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .courses-hero{padding:150px 0 40px;text-align:center;}
-  .courses-hero h1{font-size:2.6rem;}
-  .courses-hero p{margin-top:14px;font-size:1.05rem;max-width:52ch;margin-left:auto;margin-right:auto;}
-
-  .subjects-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-  }
-  .subject-card{
-    border:1px solid var(--line);
-    border-top:3px solid var(--card-accent, var(--plum-glow));
-    background:var(--bg-panel);
-    padding:26px 22px;
-    display:flex;
-    flex-direction:column;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-  }
-  .subject-card:hover{
-    background:var(--bg-panel-2);
-    transform:translateY(-4px);
-    box-shadow:0 20px 36px -24px rgba(0,0,0,0.5);
-  }
-  .subject-card .icon{
-    width:42px;height:42px;border-radius:10px;
-    background:color-mix(in srgb, var(--card-accent, var(--plum-glow)) 20%, transparent);
-    color:var(--card-accent, var(--plum-glow));
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:18px;
-  }
-  .subject-card h3{font-size:1.05rem;font-weight:600;margin-bottom:6px;color:var(--text);}
-  .subject-card .tags{font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;}
-  .subject-card .desc{font-size:0.9rem;color:var(--text-muted);margin-bottom:20px;flex-grow:1;}
-  .subject-card .learn-more{
-    align-self:flex-start;
-    padding:9px 18px;
-    border-radius:3px;
-    border:1px solid var(--card-accent, var(--plum-glow));
-    color:var(--card-accent, var(--plum-glow));
-    text-decoration:none;
-    font-size:0.88rem;
-    font-weight:500;
-    transition:background .2s ease, color .2s ease;
-  }
-  .subject-card .learn-more:hover{
-    background:var(--card-accent, var(--plum-glow));
-    color:var(--bg);
-  }
-
-  #arcOverlay{
-    position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;
-  }
-  #arcOverlay canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
-  header,main,footer{transition:opacity .6s ease;}
-
-  @media (max-width:900px){.subjects-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:640px){
-    .courses-hero{padding:120px 0 32px;}
-    .courses-hero h1{font-size:2rem;}
-    .subjects-grid{grid-template-columns:1fr;}
-  }
-</style>
+<script>
+(function(){try{var c=sessionStorage.getItem('tagTransitionColor');if(c){document.documentElement.classList.add('tag-arriving');document.documentElement.style.setProperty('--arrive-color',c);}}catch(e){}})();
+</script>
 </head>
 <body>
 
-<div id="pageTransition" aria-hidden="true">
-  <div class="pt-ground"></div>
-  <div class="pt-horizon"></div>
-  <div class="pt-sun"></div>
-</div>
-<div id="arcOverlay" aria-hidden="true">
-  <canvas id="arcCanvas"></canvas>
-</div>
+<div id="tagTransition" aria-hidden="true"><canvas id="tagTransitionCanvas"></canvas></div>
 
 <header>
   <nav>
@@ -108,78 +41,102 @@
 
   <section class="courses-hero">
     <div class="wrap">
-      <span class="eyebrow">Our courses</span>
+      <svg class="arc-mark" style="margin:0 auto 18px;" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
       <h1>Every subject has its own tutor — and its own page.</h1>
       <p>Pick a subject below to meet the tutor, see current batches, and register.</p>
     </div>
   </section>
 
-  <section style="padding-top:24px;">
+  <section style="padding-top:20px;">
     <div class="wrap">
-      <div class="subjects-grid reveal-stagger">
+      <div class="subjects-grid">
 
-        <div class="subject-card reveal" style="--card-accent:#6FA8FF;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(120 12 12)"/></svg></div>
+        <div class="subject-card" style="--card-accent:#6FA8FF;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="2.4" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" stroke="currentColor" stroke-width="1.5" transform="rotate(120 12 12)"/></svg></div>
           <h3>Physics</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
-          <p class="desc">Mechanics, waves, electricity and more — built around exam technique, not just theory.</p>
-          <a class="learn-more" href="subject.html?subject=Physics">Learn more →</a>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
+          <p class="desc">Mechanics, waves and electricity, built around exam technique, not just theory.</p>
+          <a class="learn-more" href="subject.html?subject=Physics">Explore Physics
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#4ADE9B;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 3h6M10 3v5l-5.5 9c-.8 1.4.2 3 1.8 3h11.4c1.6 0 2.6-1.6 1.8-3L14 8V3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 15h8" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="subject-card" style="--card-accent:#4ADE9B;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 3h6M10 3v5l-5.5 9c-.8 1.4.2 3 1.8 3h11.4c1.6 0 2.6-1.6 1.8-3L14 8V3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 15h8" stroke="currentColor" stroke-width="1.6"/></svg></div>
           <h3>Chemistry</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">From the periodic table to organic reactions, taught with real past-paper practice.</p>
-          <a class="learn-more" href="subject.html?subject=Chemistry">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Chemistry">Explore Chemistry
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#A78BFA;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 6h14M9 6c0 6-2 11-4 12M13 6c1.5 3 1 8 3 12M8 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="subject-card" style="--card-accent:#7C93FF;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 6h14M9 6c0 6-2 11-4 12M13 6c1.5 3 1 8 3 12M8 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <h3>Mathematics</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">Algebra through calculus, with steady, methodical problem-solving practice.</p>
-          <a class="learn-more" href="subject.html?subject=Mathematics">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Mathematics">Explore Mathematics
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#4DD9C7;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-3.5-7-7.5-7-11.5A7 7 0 0112 3a7 7 0 017 6.5C19 13.5 16 17.5 12 21z" stroke="currentColor" stroke-width="1.6"/><path d="M12 21V10" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="subject-card" style="--card-accent:#4DD9C7;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-3.5-7-7.5-7-11.5A7 7 0 0112 3a7 7 0 017 6.5C19 13.5 16 17.5 12 21z" stroke="currentColor" stroke-width="1.6"/><path d="M12 21V10" stroke="currentColor" stroke-width="1.6"/></svg></div>
           <h3>Biology</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">Cell biology, genetics and ecology, connected back to how exams actually ask it.</p>
-          <a class="learn-more" href="subject.html?subject=Biology">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Biology">Explore Biology
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#4DD8EF;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="subject-card" style="--card-accent:#4DD8EF;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <h3>Computer Science</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">Programming fundamentals and theory, taught with real code, not just diagrams.</p>
-          <a class="learn-more" href="subject.html?subject=Computer+Science">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Computer+Science">Explore Computer Science
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#FFC94D;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="8" width="17" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8V6.5A1.5 1.5 0 0110 5h4a1.5 1.5 0 011.5 1.5V8" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <div class="subject-card" style="--card-accent:#FFC94D;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="8" width="17" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8V6.5A1.5 1.5 0 0110 5h4a1.5 1.5 0 011.5 1.5V8" stroke="currentColor" stroke-width="1.6"/></svg></div>
           <h3>Business Studies</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
-          <p class="desc">How real businesses operate, market and grow — framed around the syllabus.</p>
-          <a class="learn-more" href="subject.html?subject=Business+Studies">Learn more →</a>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
+          <p class="desc">How real businesses operate, market and grow, framed around the syllabus.</p>
+          <a class="learn-more" href="subject.html?subject=Business+Studies">Explore Business Studies
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#FF7A93;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V9M10 19V5M16 19v-7M20 19V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="subject-card" style="--card-accent:#FF7A93;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V9M10 19V5M16 19v-7M20 19V3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <h3>Economics</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">Micro and macro concepts made concrete with real-world examples.</p>
-          <a class="learn-more" href="subject.html?subject=Economics">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Economics">Explore Economics
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
-        <div class="subject-card reveal" style="--card-accent:#FFA45C;">
-          <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h7M8.5 11.5h7M8.5 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="subject-card" style="--card-accent:#FFA45C;">
+          <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+          <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h7M8.5 11.5h7M8.5 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <h3>Accounts</h3>
-          <p class="tags">O Level · A Level · IGCSE</p>
+          <div class="levels"><span>O Level</span><span>A Level</span><span>IGCSE</span></div>
           <p class="desc">Ledgers, statements and adjustments, practiced the way examiners mark them.</p>
-          <a class="learn-more" href="subject.html?subject=Accounts">Learn more →</a>
+          <a class="learn-more" href="subject.html?subject=Accounts">Explore Accounts
+            <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+          </a>
         </div>
 
       </div>
@@ -220,108 +177,5 @@
 
 <script src="main.js"></script>
 <script src="transitions.js"></script>
-<script>
-(function () {
-  var overlay = document.getElementById('arcOverlay');
-  var canvas = document.getElementById('arcCanvas');
-  var ctx = canvas.getContext('2d');
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Always restore normal state on show — including browser back/forward
-  // (bfcache), which otherwise restores the page mid-transition.
-  function resetTransitionState() {
-    overlay.style.opacity = '0';
-    if (ctx && canvas.width) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.querySelectorAll('header, main, footer').forEach(function (el) {
-      el.style.transition = 'none';
-      el.style.opacity = '';
-      void el.offsetWidth;
-      el.style.transition = '';
-    });
-  }
-  window.addEventListener('pageshow', resetTransitionState);
-
-  function hexToRgb(hex) {
-    hex = (hex || '#B47FC2').replace('#', '');
-    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
-    var num = parseInt(hex, 16) || 0xB47FC2;
-    return [(num >> 16) & 255, (num >> 8) & 255, num & 255].join(',');
-  }
-
-  document.querySelectorAll('.learn-more').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      var href = link.getAttribute('href');
-      if (!href || reduced) return;
-      e.preventDefault();
-
-      var card = link.closest('.subject-card');
-      var color = card ? getComputedStyle(card).getPropertyValue('--card-accent').trim() : '#B47FC2';
-      var rgb = hexToRgb(color);
-
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      overlay.style.opacity = '1';
-      document.querySelectorAll('header, main, footer').forEach(function (el) { el.style.opacity = '0'; });
-
-      var w = canvas.width, h = canvas.height;
-      var horizonY = h * 0.7;
-      var startX = -w * 0.1, endX = w * 1.1;
-      var amp = h * 0.5;
-      var duration = 1150, start = null;
-
-      function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
-
-      function step(ts) {
-        if (!start) start = ts;
-        var t = Math.min((ts - start) / duration, 1);
-        var p = ease(t);
-        var x = startX + (endX - startX) * p;
-        var y = horizonY - amp * Math.sin(Math.PI * p);
-        var glow = Math.sin(Math.PI * p);
-
-        // dark trailing fade — leaves a soft comet trail behind the sun
-        ctx.fillStyle = 'rgba(10,6,16,0.16)';
-        ctx.fillRect(0, 0, w, h);
-
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
-
-        // spreading sky wash
-        var sky = ctx.createRadialGradient(x, y, 0, x, y, Math.max(w, h) * 0.65);
-        sky.addColorStop(0, 'rgba(' + rgb + ',' + (0.32 * glow + 0.05) + ')');
-        sky.addColorStop(1, 'rgba(' + rgb + ',0)');
-        ctx.fillStyle = sky;
-        ctx.fillRect(0, 0, w, h);
-
-        // sun bloom
-        var core = ctx.createRadialGradient(x, y, 0, x, y, 72);
-        core.addColorStop(0, 'rgba(255,255,255,0.95)');
-        core.addColorStop(0.25, 'rgba(' + rgb + ',0.9)');
-        core.addColorStop(1, 'rgba(' + rgb + ',0)');
-        ctx.fillStyle = core;
-        ctx.beginPath(); ctx.arc(x, y, 72, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
-
-        // horizon line + simple perspective grid, fading in
-        var gridAlpha = Math.min(t * 1.6, 0.45);
-        ctx.strokeStyle = 'rgba(' + rgb + ',' + gridAlpha + ')';
-        ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(0, horizonY); ctx.lineTo(w, horizonY); ctx.stroke();
-        var vpX = w / 2;
-        for (var gx = -4; gx <= 4; gx++) {
-          ctx.beginPath();
-          ctx.moveTo(vpX + gx * 40, horizonY);
-          ctx.lineTo(vpX + gx * 160, h);
-          ctx.stroke();
-        }
-
-        if (t < 1) { requestAnimationFrame(step); }
-        else { window.location.href = href; }
-      }
-      requestAnimationFrame(step);
-    });
-  });
-})();
-</script>
 </body>
 </html>

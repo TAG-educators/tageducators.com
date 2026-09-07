@@ -10,171 +10,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .subject-hero{
-    padding:150px 0 60px;
-    text-align:center;
-  }
-  .back-link{
-    display:inline-block;
-    margin-bottom:22px;
-    font-size:0.9rem;
-    color:var(--text-muted);
-    text-decoration:none;
-  }
-  .back-link:hover{color:var(--plum-glow);}
-  .subject-hero h1{font-size:2.6rem;}
-  .subject-hero .tags{
-    margin-top:14px;
-    font-size:0.95rem;
-    color:var(--text-muted);
-  }
-
-  /* Tutor card */
-  .tutor-card{
-    display:flex;
-    align-items:flex-start;
-    gap:24px;
-    background:var(--bg-panel);
-    border:1px solid var(--line);
-    padding:32px;
-    max-width:720px;
-    margin:0 auto;
-  }
-  .tutor-avatar{
-    flex-shrink:0;
-    width:64px;height:64px;
-    border-radius:50%;
-    background:rgba(180,127,194,0.14);
-    color:var(--plum-glow);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .tutor-label{
-    display:block;
-    font-size:0.82rem;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    color:var(--plum-glow);
-    margin-bottom:6px;
-  }
-  .tutor-card h3{font-size:1.2rem;margin-bottom:10px;}
-  .tutor-card p{font-size:0.96rem;}
-
-  /* Batches */
-  .batches-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-  }
-  .batch-card{
-    border:1px solid var(--line);
-    background:var(--bg-panel);
-    padding:26px 22px;
-    text-align:center;
-  }
-  .batch-card h3{font-size:1.05rem;margin-bottom:8px;}
-  .batch-card p{font-size:0.92rem;}
-  .batches-note{
-    text-align:center;
-    font-size:0.85rem;
-    color:var(--text-muted);
-    margin-top:20px;
-  }
-
-  /* Registration */
-  .register-card{
-    border:1px solid var(--line);
-    background:var(--bg-panel);
-    padding:48px 40px;
-    text-align:center;
-    max-width:640px;
-    margin:0 auto;
-  }
-  .register-card h2{font-size:1.7rem;}
-  .register-card > p{margin-top:14px;font-size:1.02rem;}
-  .subject-pill{
-    display:inline-block;
-    margin-top:18px;
-    padding:8px 18px;
-    border-radius:20px;
-    background:rgba(180,127,194,0.14);
-    color:var(--plum-glow);
-    font-size:0.9rem;
-    font-weight:500;
-  }
-  .register-note{margin-top:18px;font-size:0.88rem;color:var(--text-muted);}
-  .reg-form{text-align:left;margin-top:28px;display:flex;flex-direction:column;gap:20px;}
-  .field label{display:block;font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:8px;}
-  .field input[type="text"],
-  .field input[type="tel"],
-  .field input[type="email"]{
-    width:100%;
-    padding:11px 14px;
-    border:1px solid var(--line-strong);
-    border-radius:3px;
-    font-family:'Inter',sans-serif;
-    font-size:0.98rem;
-    color:var(--text);
-    background:var(--bg);
-    transition:border-color .15s ease;
-  }
-  .field input:focus{outline:none;border-color:var(--plum-glow);}
-  .radio-group,.checkbox-group{display:flex;flex-wrap:wrap;gap:10px 20px;}
-  .radio-group label,.checkbox-group label{
-    display:flex;align-items:center;gap:8px;
-    font-size:0.95rem;font-weight:400;margin-bottom:0;cursor:pointer;color:var(--text);
-  }
-  .radio-group input,.checkbox-group input{accent-color:var(--plum-glow);width:16px;height:16px;cursor:pointer;}
-  .reg-form .btn-primary{align-self:flex-start;margin-top:6px;}
-  .form-status{margin-top:2px;font-size:0.92rem;min-height:1.3em;}
-  .form-status.success{color:#8FD19E;}
-  .form-status.error{color:#E38B87;}
-
-  @media (max-width:900px){.batches-grid{grid-template-columns:1fr;}}
-  @media (max-width:640px){
-    .subject-hero{padding:120px 0 40px;}
-    .subject-hero h1{font-size:2rem;}
-    .tutor-card{flex-direction:column;text-align:center;align-items:center;}
-    .register-card{padding:32px 24px;}
-  }
-</style>
-
 <script>
-  // Set this subject's theme colors on :root BEFORE paint, so there's no
-  // flash of the default brand color when the page first loads.
+(function(){try{var c=sessionStorage.getItem('tagTransitionColor');if(c){document.documentElement.classList.add('tag-arriving');document.documentElement.style.setProperty('--arrive-color',c);}}catch(e){}})();
+</script>
+<script src="subjects-data.js"></script>
+<script>
+  // Apply this subject's world colors to :root BEFORE paint, from the
+  // shared dataset, so there's no flash of the default brand color.
   (function () {
-    var THEMES = {
-      'Physics':            { bg:'#0E1730', panel:'#16234A', panel2:'#1C2C5B', glow:'#6FA8FF', btn:'#2F5FD1' },
-      'Chemistry':          { bg:'#0A2A20', panel:'#123B2C', panel2:'#164A37', glow:'#4ADE9B', btn:'#1F8F5F' },
-      'Mathematics':        { bg:'#1A1740', panel:'#262058', panel2:'#312A6E', glow:'#A78BFA', btn:'#6D4FD1' },
-      'Biology':            { bg:'#0A2B2B', panel:'#123D3D', panel2:'#164C4C', glow:'#4DD9C7', btn:'#1F9E8F' },
-      'Computer Science':   { bg:'#08262E', panel:'#103642', panel2:'#134454', glow:'#4DD8EF', btn:'#1690AC' },
-      'Business Studies':   { bg:'#2E2208', panel:'#3F2F0C', panel2:'#4E3B0F', glow:'#FFC94D', btn:'#C68A1A' },
-      'Economics':          { bg:'#2E0E16', panel:'#401322', panel2:'#50172B', glow:'#FF7A93', btn:'#C23A57' },
-      'Accounts':           { bg:'#301708', panel:'#40200C', panel2:'#4F280F', glow:'#FFA45C', btn:'#C9631E' }
-    };
     var params = new URLSearchParams(window.location.search);
-    var subject = params.get('subject') || '';
-    var theme = THEMES[subject];
-    if (theme) {
+    var data = (typeof tagSubjectByName === 'function') ? tagSubjectByName(params.get('subject') || '') : null;
+    if (data) {
       var root = document.documentElement.style;
-      root.setProperty('--bg', theme.bg);
-      root.setProperty('--bg-panel', theme.panel);
-      root.setProperty('--bg-panel-2', theme.panel2);
-      root.setProperty('--plum-glow', theme.glow);
-      root.setProperty('--plum', theme.btn);
-      root.setProperty('--plum-light', theme.glow);
+      root.setProperty('--bg', data.bg);
+      root.setProperty('--bg-panel', data.panel);
+      root.setProperty('--bg-panel-2', data.panel2);
+      root.setProperty('--plum-glow', data.accent);
+      root.setProperty('--plum', data.btn);
+      root.setProperty('--plum-light', data.accent);
     }
   })();
 </script>
 </head>
 <body>
 
-<div id="pageTransition" aria-hidden="true">
-  <div class="pt-ground"></div>
-  <div class="pt-horizon"></div>
-  <div class="pt-sun"></div>
-</div>
+<div id="tagTransition" aria-hidden="true"><canvas id="tagTransitionCanvas"></canvas></div>
 
 <header>
   <nav>
@@ -200,104 +60,111 @@
   <!-- ================= SUBJECT HERO ================= -->
   <section class="subject-hero">
     <div class="wrap">
-      <a href="courses.html" class="back-link">← All courses</a>
+      <a href="courses.html" class="back-link">
+        <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
+        All courses
+      </a>
+      <div class="subject-icon"><svg id="subjectIconSvg" viewBox="0 0 24 24" fill="none"></svg></div>
       <h1 id="subjectTitle">Subject</h1>
-      <p class="tags">O Level · A Level · IGCSE</p>
+      <div class="levels" id="subjectLevels"></div>
+      <p class="blurb" id="subjectBlurb">We're finalizing the details for this subject.</p>
     </div>
   </section>
 
-  <!-- ================= TUTOR ================= -->
-  <section style="padding-top:0;">
-    <div class="wrap">
-      <div class="tutor-card reveal">
-        <div class="tutor-avatar">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.6"/></svg>
-        </div>
-        <div>
-          <span class="tutor-label">Your tutor for <span id="subjectNameInline">this subject</span></span>
-          <h3>Profile coming soon</h3>
-          <p>We're finalizing tutor profiles for this subject. Message us on WhatsApp for background and credentials in the meantime, and we'll have this page updated shortly.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= BATCHES ================= -->
-  <!-- PLACEHOLDER: example batch timings — replace with the real, current schedule for this subject. -->
   <section>
     <div class="wrap">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Currently offered</span>
-        <h2>Available batches</h2>
-      </div>
-      <div class="batches-grid reveal-stagger">
-        <div class="batch-card reveal">
-          <h3>Batch A</h3>
-          <p>Weekday evenings</p>
-        </div>
-        <div class="batch-card reveal">
-          <h3>Batch B</h3>
-          <p>Weekend mornings</p>
-        </div>
-        <div class="batch-card reveal">
-          <h3>Batch C</h3>
-          <p>Flexible, on request</p>
-        </div>
-      </div>
-      <p class="batches-note">Timings shown are indicative — confirm exact slots on WhatsApp before registering.</p>
-    </div>
-  </section>
+      <div class="subject-layout">
 
-  <!-- ================= REGISTRATION ================= -->
-  <section id="register">
-    <div class="wrap">
-      <div class="register-card reveal">
-        <h2>Register for this course</h2>
-        <p>Fill out the short form and we'll be in touch to confirm your child's spot.</p>
-        <span class="subject-pill" id="subjectPill">Subject</span>
+        <!-- ============= LEFT: tutor + batches ============= -->
+        <div class="subject-main">
 
-        <form id="regForm" class="reg-form" novalidate>
-          <input type="hidden" id="subjectField" name="subjectField" value="">
-          <div class="field">
-            <label for="fullName">Student's full name *</label>
-            <input type="text" id="fullName" name="fullName" required>
-          </div>
-          <div class="field">
-            <label for="parentName">Parent/Guardian name *</label>
-            <input type="text" id="parentName" name="parentName" required>
-          </div>
-          <div class="field">
-            <label for="contactNumber">Contact number (WhatsApp) *</label>
-            <input type="tel" id="contactNumber" name="contactNumber" required>
-          </div>
-          <div class="field">
-            <label for="email">Email address *</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="field">
-            <label>Curriculum *</label>
-            <div class="radio-group">
-              <label><input type="radio" name="curriculum" value="Cambridge O Level" required> Cambridge O Level</label>
-              <label><input type="radio" name="curriculum" value="Cambridge A Level"> Cambridge A Level</label>
-              <label><input type="radio" name="curriculum" value="Cambridge IGCSE"> Cambridge IGCSE</label>
+          <div class="tutor-card">
+            <div class="tutor-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <div>
+              <span class="tutor-label">Your tutor for <span id="subjectNameInline">this subject</span></span>
+              <h3>Profile coming soon</h3>
+              <p>We're finalizing tutor profiles for this subject. Message us on WhatsApp for background and credentials in the meantime, and we'll have this page updated shortly.</p>
             </div>
           </div>
-          <div class="field">
-            <label>Preferred days</label>
-            <div class="checkbox-group" id="daysGroup">
-              <label><input type="checkbox" name="days" value="Monday"> Monday</label>
-              <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
-              <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
-              <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
-              <label><input type="checkbox" name="days" value="Friday"> Friday</label>
-              <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
-              <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+
+          <div>
+            <div class="section-head" style="margin-bottom:20px;">
+              <h2 style="font-size:1.4rem;">Available batches</h2>
             </div>
+            <!-- PLACEHOLDER: example batch timings — replace with the real, current schedule for this subject. -->
+            <div class="batch-list">
+              <div class="batch-row">
+                <h4>Batch A</h4>
+                <span>Weekday evenings</span>
+              </div>
+              <div class="batch-row">
+                <h4>Batch B</h4>
+                <span>Weekend mornings</span>
+              </div>
+              <div class="batch-row">
+                <h4>Batch C</h4>
+                <span>Flexible, on request</span>
+              </div>
+            </div>
+            <p class="batches-note">Timings shown are indicative — confirm exact slots on WhatsApp before registering.</p>
           </div>
-          <button type="submit" class="btn-primary" id="submitBtn">Submit registration</button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </form>
-        <p class="register-note">Prefer WhatsApp? Message us at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
+
+        </div>
+
+        <!-- ============= RIGHT: registration ============= -->
+        <div>
+          <div class="register-card">
+            <h2>Register for this course</h2>
+            <p>Fill out the short form and we'll be in touch to confirm your child's spot.</p>
+            <span class="subject-pill" id="subjectPill">Subject</span>
+
+            <form id="regForm" class="reg-form" novalidate>
+              <input type="hidden" id="subjectField" name="subjectField" value="">
+              <div class="field">
+                <label for="fullName">Student's full name *</label>
+                <input type="text" id="fullName" name="fullName" required>
+              </div>
+              <div class="field">
+                <label for="parentName">Parent/Guardian name *</label>
+                <input type="text" id="parentName" name="parentName" required>
+              </div>
+              <div class="field">
+                <label for="contactNumber">Contact number (WhatsApp) *</label>
+                <input type="tel" id="contactNumber" name="contactNumber" required>
+              </div>
+              <div class="field">
+                <label for="email">Email address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="field">
+                <label>Curriculum *</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="curriculum" value="Cambridge O Level" required> Cambridge O Level</label>
+                  <label><input type="radio" name="curriculum" value="Cambridge A Level"> Cambridge A Level</label>
+                  <label><input type="radio" name="curriculum" value="Cambridge IGCSE"> Cambridge IGCSE</label>
+                </div>
+              </div>
+              <div class="field">
+                <label>Preferred days</label>
+                <div class="checkbox-group" id="daysGroup">
+                  <label><input type="checkbox" name="days" value="Monday"> Monday</label>
+                  <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+                  <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+                  <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+                  <label><input type="checkbox" name="days" value="Friday"> Friday</label>
+                  <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
+                  <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary" id="submitBtn">Submit registration</button>
+              <p class="form-status" id="formStatus" role="status"></p>
+            </form>
+            <p class="register-note">Prefer WhatsApp? Message us at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -340,12 +207,21 @@
   // ---------- Read subject from the URL (?subject=Physics) ----------
   var params = new URLSearchParams(window.location.search);
   var subject = params.get('subject') || 'This Subject';
+  var subjectData = (typeof tagSubjectByName === 'function') ? tagSubjectByName(subject) : null;
 
   document.getElementById('subjectTitle').textContent = subject;
   document.getElementById('subjectNameInline').textContent = subject;
   document.getElementById('subjectPill').textContent = 'Registering for: ' + subject;
   document.getElementById('subjectField').value = subject;
   document.title = subject + ' — TAG Educators';
+
+  if (subjectData) {
+    document.getElementById('subjectIconSvg').innerHTML = subjectData.icon;
+    document.getElementById('subjectBlurb').textContent = subjectData.blurb;
+    document.getElementById('subjectLevels').innerHTML = subjectData.levels.map(function (l) { return '<span>' + l + '</span>'; }).join('');
+  } else {
+    document.getElementById('subjectLevels').innerHTML = '<span>O Level</span><span>A Level</span><span>IGCSE</span>';
+  }
 
   // ---------- Registration form ----------
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybEdlpGuNDrp62TZemO7RaQxDHiubP3fzzpViJhr8UuFejWCeU_C--TNjPSAjis87K7g/exec';

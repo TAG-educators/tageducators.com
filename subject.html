@@ -49,7 +49,6 @@
 </header>
 
 <main>
-  <!-- ================= SUBJECT HERO ================= -->
   <section class="subject-hero">
     <div class="wrap">
       <a href="courses.html" class="back-link">
@@ -66,8 +65,7 @@
   <section>
     <div class="wrap">
       <div class="subject-layout">
-
-        <!-- ============= LEFT: tutor + batches ============= -->
+        
         <div class="subject-main">
           <div class="tutor-card">
             <div class="tutor-avatar">
@@ -81,23 +79,74 @@
           </div>
         </div>
 
-        <!-- ============= RIGHT: registration ============= -->
         <div>
           <div class="register-card">
-            <h2>Claim Your Free Trial</h2>
-            <p>Fill out the form below to secure your spot in our upcoming Oct/Nov micro-cohort.</p>
+            <h2>Claim Your 3 Free Trial Classes</h2>
+            <p>Fill out the form below to secure your spot in our highly exclusive Past Paper Masterclass. Seats are extremely limited.</p>
             <span class="subject-pill" id="subjectPill">Subject</span>
 
             <form id="regForm" class="reg-form" novalidate>
               <input type="hidden" id="subjectField" name="subjectField" value="">
+              
               <div class="field">
-                <label for="fullName">Student's full name *</label>
+                <label for="fullName">Student's Full Name *</label>
                 <input type="text" id="fullName" name="fullName" required>
               </div>
               <div class="field">
-                <label for="contactNumber">WhatsApp Number *</label>
-                <input type="tel" id="contactNumber" name="contactNumber" required>
+                <label for="contactNumber">Student's WhatsApp Number *</label>
+                <input type="tel" id="contactNumber" name="contactNumber" placeholder="Include country code (e.g., +92, +44)" required>
               </div>
+              <div class="field">
+                <label for="email">Student's Email Address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="field">
+                <label for="location">Current Location (Country & City) *</label>
+                <input type="text" id="location" name="location" required>
+              </div>
+
+              <div class="field">
+                <label>Academic Level *</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="academicLevel" value="IGCSE" required> IGCSE</label>
+                  <label><input type="radio" name="academicLevel" value="O-Level"> O-Level</label>
+                  <label><input type="radio" name="academicLevel" value="AS-Level"> AS-Level</label>
+                  <label><input type="radio" name="academicLevel" value="A2-Level"> A2-Level</label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Target Exam Series *</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="examSeries" value="Oct/Nov 2026" required> Oct/Nov 2026</label>
+                  <label><input type="radio" name="examSeries" value="Feb/March 2027"> Feb/March 2027</label>
+                  <label><input type="radio" name="examSeries" value="May/June 2027"> May/June 2027</label>
+                </div>
+              </div>
+
+              <div class="field" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line);">
+                <label for="parentName">Parent / Guardian Full Name *</label>
+                <input type="text" id="parentName" name="parentName" required>
+              </div>
+              <div class="field">
+                <label for="parentContact">Parent / Guardian WhatsApp Number *</label>
+                <input type="tel" id="parentContact" name="parentContact" required>
+              </div>
+              <div class="field">
+                <label for="parentEmail">Parent / Guardian Email Address *</label>
+                <input type="email" id="parentEmail" name="parentEmail" required>
+              </div>
+
+              <div class="field" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line);">
+                <label>Secure Your Micro-Cohort Slot 🚨 *</label>
+                <div class="checkbox-group">
+                  <label style="align-items: flex-start;">
+                    <input type="checkbox" name="commitment" required style="margin-top: 4px;"> 
+                    <span>I understand my registration grants 3 FREE Trial Classes. Since batch sizes are strictly limited, I agree to finalize my fee payment immediately after the 3rd class to permanently lock in my seat before it is passed to the next student on the waitlist.</span>
+                  </label>
+                </div>
+              </div>
+
               <button type="submit" class="btn-primary" id="submitBtn">Secure My Spot</button>
               <p class="form-status" id="formStatus" role="status"></p>
             </form>
@@ -172,9 +221,22 @@
   regForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    if (!regForm.querySelector('input[name="commitment"]').checked) {
+      formStatus.textContent = 'Please agree to the trial terms to secure your spot.';
+      formStatus.className = 'form-status error';
+      return;
+    }
+
     var data = {
       fullName: document.getElementById('fullName').value,
       contactNumber: document.getElementById('contactNumber').value,
+      email: document.getElementById('email').value,
+      location: document.getElementById('location').value,
+      academicLevel: regForm.querySelector('input[name="academicLevel"]:checked')?.value || '',
+      examSeries: regForm.querySelector('input[name="examSeries"]:checked')?.value || '',
+      parentName: document.getElementById('parentName').value,
+      parentContact: document.getElementById('parentContact').value,
+      parentEmail: document.getElementById('parentEmail').value,
       subjects: [subject]
     };
 
@@ -188,7 +250,7 @@
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(data)
     }).then(function () {
-      formStatus.textContent = "Thanks! We've received your registration and will be in touch soon.";
+      formStatus.textContent = "Thanks! We've received your registration and will be in touch on WhatsApp shortly.";
       formStatus.className = 'form-status success';
       regForm.reset();
     }).catch(function () {

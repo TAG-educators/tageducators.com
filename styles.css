@@ -5,21 +5,27 @@
    transition moment between pages. Everything else stays quiet. */
 
 :root{
-  --bg:#170D1C;
-  --bg-panel:#241330;
-  --bg-panel-2:#2C1739;
-  --line:rgba(255,255,255,0.09);
-  --line-strong:rgba(255,255,255,0.17);
-  --plum:#5A2A64;
-  --plum-light:#A96BB8;
-  --plum-glow:#B47FC2;
-  --gold:#E8B75D;
-  --text:#F6F1F8;
-  --text-muted:#C9B9D1;
+  --bg: #0B0B0F;
+  --bg-panel: #1F2229;
+  --bg-panel-2: #2A2E35;
+  --line: rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.15);
+  --plum: #5A2A64;
+  --plum-light: #7A3B85;
+  --plum-glow: #7A3B85;
+  --gold: #FFFFFF;
+  --text: #FFFFFF;
+  --text-muted: #9BA3AF;
 
-  --serif:'Source Serif 4', ui-serif, Georgia, serif;
-  --sans:'Inter', system-ui, sans-serif;
+  --serif: 'Source Serif 4', ui-serif, Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
 
+  --fs-hero: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem);
+  --fs-h2: clamp(1.6rem, 1.35rem + 1.1vw, 2.3rem);
+  --fs-h3: 1.1rem;
+  --fs-body: 1rem;
+  --fs-small: 0.88rem;
+}
   /* fluid type scale */
   --fs-hero: clamp(2.1rem, 1.5rem + 2.6vw, 3.4rem);
   --fs-h2:   clamp(1.6rem, 1.35rem + 1.1vw, 2.3rem);

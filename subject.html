@@ -1,3 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course — TAG Educators</title>
+<meta name="description" content="Meet your tutor and register for one-to-one Cambridge tutoring with TAG Educators.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="subjects-data.js"></script>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var data = (typeof tagSubjectByName === 'function') ? tagSubjectByName(params.get('subject') || '') : null;
+    if (data) {
+      var root = document.documentElement.style;
+      root.setProperty('--bg', data.bg);
+      root.setProperty('--bg-panel', data.panel);
+      root.setProperty('--bg-panel-2', data.panel2);
+      root.setProperty('--plum-glow', data.accent);
+      root.setProperty('--plum', data.btn);
+      root.setProperty('--plum-light', data.accent);
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="TAG Educators logo">
+      <span>TAG Educators</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="index.html#why">Why TAG</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="courses.html" class="nav-cta">All Courses</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
 <main>
   <!-- ================= SUBJECT HERO ================= -->
   <section class="subject-hero">
@@ -54,6 +104,7 @@
             <p class="register-note">Prefer WhatsApp? Message us instantly at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -63,3 +114,92 @@
     Chat on WhatsApp
   </a>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <img src="logo.png" alt="TAG Educators logo" style="height:36px;width:36px;">
+          <span>TAG Educators</span>
+        </a>
+        <p>Premium Cambridge O Level, A Level and IGCSE tutoring — one-to-one, wherever you are.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="index.html#why">Why TAG</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/923162165779" target="_blank" rel="noopener">WhatsApp: +92 316 216 5779</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">The Ark Global Educators &copy; <span id="year"></span>. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var subject = params.get('subject') || 'This Subject';
+  var subjectData = (typeof tagSubjectByName === 'function') ? tagSubjectByName(subject) : null;
+
+  document.getElementById('subjectTitle').textContent = subject;
+  document.getElementById('subjectPill').textContent = 'Registering for: ' + subject;
+  document.getElementById('subjectField').value = subject;
+  document.title = subject + ' — TAG Educators';
+
+  if (subjectData) {
+    document.getElementById('subjectIconSvg').innerHTML = subjectData.icon;
+    document.getElementById('subjectBlurb').textContent = subjectData.blurb;
+    document.getElementById('subjectLevels').innerHTML = subjectData.levels.map(function (l) { return '<span>' + l + '</span>'; }).join('');
+  } else {
+    document.getElementById('subjectLevels').innerHTML = '<span>O Level</span><span>A Level</span><span>IGCSE</span>';
+  }
+
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybEdlpGuNDrp62TZemO7RaQxDHiubP3fzzpViJhr8UuFejWCeU_C--TNjPSAjis87K7g/exec';
+  var regForm = document.getElementById('regForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var formStatus = document.getElementById('formStatus');
+
+  regForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var data = {
+      fullName: document.getElementById('fullName').value,
+      contactNumber: document.getElementById('contactNumber').value,
+      subjects: [subject]
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    formStatus.textContent = '';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data)
+    }).then(function () {
+      formStatus.textContent = "Thanks! We've received your registration and will be in touch soon.";
+      formStatus.className = 'form-status success';
+      regForm.reset();
+    }).catch(function () {
+      formStatus.textContent = 'Something went wrong sending that. Please try again or message us on WhatsApp.';
+      formStatus.className = 'form-status error';
+    }).finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Secure My Spot';
+    });
+  });
+</script>
+
+</body>
+</html>

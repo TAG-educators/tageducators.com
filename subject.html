@@ -1,62 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Course — TAG Educators</title>
-<meta name="description" content="Meet your tutor and register for one-to-one Cambridge tutoring with TAG Educators.">
-<link rel="icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<script>
-(function(){try{var c=sessionStorage.getItem('tagTransitionColor');if(c){document.documentElement.classList.add('tag-arriving');document.documentElement.style.setProperty('--arrive-color',c);}}catch(e){}})();
-</script>
-<script src="subjects-data.js"></script>
-<script>
-  // Apply this subject's world colors to :root BEFORE paint, from the
-  // shared dataset, so there's no flash of the default brand color.
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var data = (typeof tagSubjectByName === 'function') ? tagSubjectByName(params.get('subject') || '') : null;
-    if (data) {
-      var root = document.documentElement.style;
-      root.setProperty('--bg', data.bg);
-      root.setProperty('--bg-panel', data.panel);
-      root.setProperty('--bg-panel-2', data.panel2);
-      root.setProperty('--plum-glow', data.accent);
-      root.setProperty('--plum', data.btn);
-      root.setProperty('--plum-light', data.accent);
-    }
-  })();
-</script>
-</head>
-<body>
-
-<div id="tagTransition" aria-hidden="true"><canvas id="tagTransitionCanvas"></canvas></div>
-
-<header>
-  <nav>
-    <a href="index.html" class="brand">
-      <img src="logo.png" alt="TAG Educators logo">
-      <span>TAG Educators</span>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="index.html#why">Why TAG</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <a href="courses.html" class="nav-cta">All Courses</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-</header>
-
 <main>
-
   <!-- ================= SUBJECT HERO ================= -->
   <section class="subject-hero">
     <div class="wrap">
@@ -77,47 +19,23 @@
 
         <!-- ============= LEFT: tutor + batches ============= -->
         <div class="subject-main">
-
           <div class="tutor-card">
             <div class="tutor-avatar">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.6"/></svg>
             </div>
             <div>
-              <span class="tutor-label">Your tutor for <span id="subjectNameInline">this subject</span></span>
-              <h3>Profile coming soon</h3>
-              <p>We're finalizing tutor profiles for this subject. Message us on WhatsApp for background and credentials in the meantime, and we'll have this page updated shortly.</p>
+              <span class="tutor-label">Cambridge Certified Faculty</span>
+              <h3>Master the Examiner's Mark Scheme</h3>
+              <p>Our faculty doesn't just read from a textbook—we train students to beat the examiner's marking scheme. Get insider knowledge on exact exam traps and highly personalized micro-cohort guidance.</p>
             </div>
           </div>
-
-          <div>
-            <div class="section-head" style="margin-bottom:20px;">
-              <h2 style="font-size:1.4rem;">Available batches</h2>
-            </div>
-            <!-- PLACEHOLDER: example batch timings — replace with the real, current schedule for this subject. -->
-            <div class="batch-list">
-              <div class="batch-row">
-                <h4>Batch A</h4>
-                <span>Weekday evenings</span>
-              </div>
-              <div class="batch-row">
-                <h4>Batch B</h4>
-                <span>Weekend mornings</span>
-              </div>
-              <div class="batch-row">
-                <h4>Batch C</h4>
-                <span>Flexible, on request</span>
-              </div>
-            </div>
-            <p class="batches-note">Timings shown are indicative — confirm exact slots on WhatsApp before registering.</p>
-          </div>
-
         </div>
 
         <!-- ============= RIGHT: registration ============= -->
         <div>
           <div class="register-card">
-            <h2>Register for this course</h2>
-            <p>Fill out the short form and we'll be in touch to confirm your child's spot.</p>
+            <h2>Claim Your Free Trial</h2>
+            <p>Fill out the form below to secure your spot in our upcoming Oct/Nov micro-cohort.</p>
             <span class="subject-pill" id="subjectPill">Subject</span>
 
             <form id="regForm" class="reg-form" novalidate>
@@ -127,153 +45,21 @@
                 <input type="text" id="fullName" name="fullName" required>
               </div>
               <div class="field">
-                <label for="parentName">Parent/Guardian name *</label>
-                <input type="text" id="parentName" name="parentName" required>
-              </div>
-              <div class="field">
-                <label for="contactNumber">Contact number (WhatsApp) *</label>
+                <label for="contactNumber">WhatsApp Number *</label>
                 <input type="tel" id="contactNumber" name="contactNumber" required>
               </div>
-              <div class="field">
-                <label for="email">Email address *</label>
-                <input type="email" id="email" name="email" required>
-              </div>
-              <div class="field">
-                <label>Curriculum *</label>
-                <div class="radio-group">
-                  <label><input type="radio" name="curriculum" value="Cambridge O Level" required> Cambridge O Level</label>
-                  <label><input type="radio" name="curriculum" value="Cambridge A Level"> Cambridge A Level</label>
-                  <label><input type="radio" name="curriculum" value="Cambridge IGCSE"> Cambridge IGCSE</label>
-                </div>
-              </div>
-              <div class="field">
-                <label>Preferred days</label>
-                <div class="checkbox-group" id="daysGroup">
-                  <label><input type="checkbox" name="days" value="Monday"> Monday</label>
-                  <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
-                  <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
-                  <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
-                  <label><input type="checkbox" name="days" value="Friday"> Friday</label>
-                  <label><input type="checkbox" name="days" value="Saturday"> Saturday</label>
-                  <label><input type="checkbox" name="days" value="Sunday"> Sunday</label>
-                </div>
-              </div>
-              <button type="submit" class="btn-primary" id="submitBtn">Submit registration</button>
+              <button type="submit" class="btn-primary" id="submitBtn">Secure My Spot</button>
               <p class="form-status" id="formStatus" role="status"></p>
             </form>
-            <p class="register-note">Prefer WhatsApp? Message us at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
+            <p class="register-note">Prefer WhatsApp? Message us instantly at <a href="https://wa.me/923162165779" target="_blank" rel="noopener">+92 316 216 5779</a></p>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
+  <!-- Floating WhatsApp Bridge -->
+  <a href="https://wa.me/923162165779?text=Hi%20TAG%20Educators!%20I%20am%20interested%20in%20the%20Past%20Paper%20Masterclass" target="_blank" rel="noopener" style="position: fixed; bottom: 24px; right: 24px; background: #25D366; color: white; padding: 14px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 100;">
+    Chat on WhatsApp
+  </a>
 </main>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="brand">
-          <img src="logo.png" alt="TAG Educators logo" style="height:36px;width:36px;">
-          <span>TAG Educators</span>
-        </a>
-        <p>Premium Cambridge O Level, A Level and IGCSE tutoring — one-to-one, wherever you are.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="index.html#why">Why TAG</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="https://wa.me/923162165779" target="_blank" rel="noopener">WhatsApp: +92 316 216 5779</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">The Ark Global Educators &copy; <span id="year"></span>. All rights reserved.</div>
-  </div>
-</footer>
-
-<script src="main.js"></script>
-<script src="transitions.js"></script>
-<script>
-  // ---------- Read subject from the URL (?subject=Physics) ----------
-  var params = new URLSearchParams(window.location.search);
-  var subject = params.get('subject') || 'This Subject';
-  var subjectData = (typeof tagSubjectByName === 'function') ? tagSubjectByName(subject) : null;
-
-  document.getElementById('subjectTitle').textContent = subject;
-  document.getElementById('subjectNameInline').textContent = subject;
-  document.getElementById('subjectPill').textContent = 'Registering for: ' + subject;
-  document.getElementById('subjectField').value = subject;
-  document.title = subject + ' — TAG Educators';
-
-  if (subjectData) {
-    document.getElementById('subjectIconSvg').innerHTML = subjectData.icon;
-    document.getElementById('subjectBlurb').textContent = subjectData.blurb;
-    document.getElementById('subjectLevels').innerHTML = subjectData.levels.map(function (l) { return '<span>' + l + '</span>'; }).join('');
-  } else {
-    document.getElementById('subjectLevels').innerHTML = '<span>O Level</span><span>A Level</span><span>IGCSE</span>';
-  }
-
-  // ---------- Registration form ----------
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybEdlpGuNDrp62TZemO7RaQxDHiubP3fzzpViJhr8UuFejWCeU_C--TNjPSAjis87K7g/exec';
-
-  var regForm = document.getElementById('regForm');
-  var submitBtn = document.getElementById('submitBtn');
-  var formStatus = document.getElementById('formStatus');
-
-  regForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var days = Array.from(regForm.querySelectorAll('input[name="days"]:checked')).map(function (el) { return el.value; });
-    var curriculumEl = regForm.querySelector('input[name="curriculum"]:checked');
-
-    if (!curriculumEl) {
-      formStatus.textContent = 'Please choose a curriculum.';
-      formStatus.className = 'form-status error';
-      return;
-    }
-
-    var data = {
-      fullName: document.getElementById('fullName').value,
-      parentName: document.getElementById('parentName').value,
-      contactNumber: document.getElementById('contactNumber').value,
-      email: document.getElementById('email').value,
-      curriculum: curriculumEl.value,
-      subjects: [subject],
-      days: days
-    };
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    formStatus.textContent = '';
-
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(data)
-    }).then(function () {
-      formStatus.textContent = "Thanks! We've received your registration and will be in touch soon.";
-      formStatus.className = 'form-status success';
-      regForm.reset();
-    }).catch(function () {
-      formStatus.textContent = 'Something went wrong sending that. Please try again or message us on WhatsApp.';
-      formStatus.className = 'form-status error';
-    }).finally(function () {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit registration';
-    });
-  });
-</script>
-
-</body>
-</html>

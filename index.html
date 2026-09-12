@@ -10,8 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>if(sessionStorage.getItem('tagEntering')==='1'){document.documentElement.classList.add('tag-arriving');}</script>
 </head>
-<body class="fade-in">
+<body>
 
 <header>
   <nav>
@@ -40,6 +41,13 @@
       <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
       <h1>Taught by someone who's already sat this exact exam.</h1>
       <p class="hero-sub">TAG Educators matches O Level, A Level and IGCSE students with specialist, one-to-one tutors — live online, wherever in the world you are.</p>
+      <form class="hero-search" id="heroSearch" role="search" aria-label="Search a subject">
+        <input type="text" id="heroSearchInput" placeholder="Search your subject… e.g. Physics, Accounts" autocomplete="off">
+        <button type="submit" aria-label="Search">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </form>
+      <p class="hero-search-status" id="heroSearchStatus" aria-live="polite"></p>
       <div class="btn-row">
         <a href="courses.html" class="btn-primary">View courses</a>
         <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-secondary">Message on WhatsApp</a>
@@ -56,7 +64,7 @@
           <svg class="go-arc" viewBox="0 0 20 14" aria-hidden="true"><path class="horizon" d="M1 10h18"/><path class="sun" d="M10 4a5 5 0 015 5H5a5 5 0 015-5z"/></svg>
         </a>
       </div>
-      <div class="orbit-track" id="orbitTrack"></div>
+      <div class="orbit-track reveal" id="orbitTrack"></div>
     </div>
   </section>
 
@@ -66,7 +74,7 @@
       <div class="section-head">
         <h2>Getting started takes three steps</h2>
       </div>
-      <div class="steps">
+      <div class="steps reveal-stagger">
         <div class="step">
           <span class="num">01</span>
           <h3>Browse a subject</h3>
@@ -92,7 +100,7 @@
       <div class="section-head center">
         <h2>Questions parents usually ask</h2>
       </div>
-      <div class="faq-list" id="faqList">
+      <div class="faq-list reveal" id="faqList">
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">
             Why choose TAG Educators?
@@ -124,7 +132,7 @@
       <div class="section-head center">
         <h2>Don't take our word for it</h2>
       </div>
-      <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stats-grid reveal-stagger" style="grid-template-columns: repeat(3, 1fr);">
         <div class="stat-card">
           <div class="stat-label" style="font-size:1.1rem; color:var(--text); font-style:italic;">"I finished my Physics course two months before the exams... right now I'm doing past papers and they're a breeze in all honesty."</div>
           <div class="stat-num" style="font-size:1rem; margin-top:16px;">— Nubaid</div>
@@ -142,7 +150,7 @@
   </section>
 
   <!-- ================= FINAL CTA ================= -->
-  <section class="cta-band">
+  <section class="cta-band reveal">
     <div class="wrap">
       <h2>Ready to find your tutor?</h2>
       <p>Message us your subject and level on WhatsApp, or browse courses to see current batches.</p>
@@ -178,5 +186,6 @@
 
 <script src="subjects-data.js"></script>
 <script src="main.js"></script>
+<script src="transitions.js"></script>
 </body>
 </html>

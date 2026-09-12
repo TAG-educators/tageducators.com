@@ -11,23 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="subjects-data.js"></script>
-<script>
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var data = (typeof tagSubjectByName === 'function') ? tagSubjectByName(params.get('subject') || '') : null;
-    if (data) {
-      var root = document.documentElement.style;
-      root.setProperty('--bg', data.bg);
-      root.setProperty('--bg-panel', data.panel);
-      root.setProperty('--bg-panel-2', data.panel2);
-      root.setProperty('--plum-glow', data.accent);
-      root.setProperty('--plum', data.btn);
-      root.setProperty('--plum-light', data.accent);
-    }
-  })();
-</script>
+<script>if(sessionStorage.getItem('tagEntering')==='1'){document.documentElement.classList.add('tag-arriving');}</script>
 </head>
 <body>
+
+<div id="subjectPatternLayer" aria-hidden="true"></div>
 
 <header>
   <nav>
@@ -67,7 +55,7 @@
       <div class="subject-layout">
         
         <div class="subject-main">
-          <div class="tutor-card">
+          <div class="tutor-card reveal">
             <div class="tutor-avatar">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.6"/></svg>
             </div>
@@ -80,7 +68,7 @@
         </div>
 
         <div>
-          <div class="register-card">
+          <div class="register-card reveal">
             <h2>Claim Your 3 Free Trial Classes</h2>
             <p>Fill out the form below to secure your spot in our highly exclusive Past Paper Masterclass. Seats are extremely limited.</p>
             <span class="subject-pill" id="subjectPill">Subject</span>
@@ -195,6 +183,8 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="pattern-bg.js"></script>
+<script src="transitions.js"></script>
 <script>
   var params = new URLSearchParams(window.location.search);
   var subject = params.get('subject') || 'This Subject';

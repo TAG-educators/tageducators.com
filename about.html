@@ -10,13 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<script>
-(function(){try{var c=sessionStorage.getItem('tagTransitionColor');if(c){document.documentElement.classList.add('tag-arriving');document.documentElement.style.setProperty('--arrive-color',c);}}catch(e){}})();
-</script>
+<script>if(sessionStorage.getItem('tagEntering')==='1'){document.documentElement.classList.add('tag-arriving');}</script>
 </head>
 <body>
-
-<div id="tagTransition" aria-hidden="true"><canvas id="tagTransitionCanvas"></canvas></div>
 
 <header>
   <nav>
@@ -44,7 +40,7 @@
       <h1>The Ark Global Educators.</h1>
       <p class="lede">The full story — how TAG started and who's behind it — is still being written. Here's what's true today.</p>
 
-      <div class="about-points">
+      <div class="about-points reveal-stagger">
         <div class="about-point">
           <h3>Tutors who've sat the exam</h3>
           <p>Every tutor teaches within their own specialism and has actually sat these exact Cambridge papers — not a generalist assigned to a subject list.</p>
@@ -59,7 +55,7 @@
         </div>
       </div>
 
-      <div class="about-cta">
+      <div class="about-cta reveal">
         <p>Questions about a tutor, a subject, or how sessions run? Message us directly and we'll answer in person.</p>
         <div class="btn-row" style="justify-content:flex-start;margin-top:22px;">
           <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-primary">Message us on WhatsApp</a>

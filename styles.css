@@ -232,6 +232,17 @@ footer h1,footer h2,footer h3,footer .brand span{color:#F5F1F6;}
 .hero-sub{margin:22px auto 0;font-size:1.15rem;max-width:52ch;}
 .hero .btn-row{margin-top:34px;}
 
+/* ---------- Hero trust strip (tutor credentials) ---------- */
+.trust-strip{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:8px 12px;margin-top:20px;
+  font-size:0.86rem;color:var(--text-muted);
+}
+.trust-strip span{display:inline-flex;align-items:center;gap:6px;}
+.trust-strip svg{color:var(--plum-glow);flex-shrink:0;}
+.trust-strip .dot-sep{color:var(--line-strong);}
+@media (max-width:640px){.trust-strip{font-size:0.8rem;gap:6px 10px;}}
+
 /* ---------- Hero subject search ---------- */
 .hero-search{
   position:relative;

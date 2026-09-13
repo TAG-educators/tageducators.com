@@ -57,18 +57,6 @@ if ('IntersectionObserver' in window && statEls.length) {
   statEls.forEach(function (el) { el.textContent = el.getAttribute('data-target'); });
 }
 
-// Orbit strip (homepage) — one chip per subject, reading the shared dataset
-var orbitTrack = document.getElementById('orbitTrack');
-if (orbitTrack && typeof TAG_SUBJECTS !== 'undefined') {
-  orbitTrack.innerHTML = TAG_SUBJECTS.map(function (s) {
-    return '<a class="orbit-chip" href="subject.html?subject=' + encodeURIComponent(s.name) + '">' +
-      '<span class="dot" style="background:color-mix(in srgb, var(--plum-glow) 18%, transparent); color:var(--plum-glow)">' +
-      '<svg viewBox="0 0 24 24" fill="none">' + s.icon + '</svg></span>' +
-      '<span class="name">' + s.name + '</span>' +
-      '<span class="lvl">' + s.levels.join(' \u00b7 ') + '</span></a>';
-  }).join('');
-}
-
 // ---------- Scroll reveal ----------
 // Sections fade and rise into place as they enter the viewport — one quiet,
 // consistently-applied pattern rather than a different effect per section.

@@ -57,6 +57,32 @@ if ('IntersectionObserver' in window && statEls.length) {
   statEls.forEach(function (el) { el.textContent = el.getAttribute('data-target'); });
 }
 
+// ---------- Resources grid (resources page) ----------
+// One card per subject, built from the shared dataset — the only place
+// this list needs editing is subjects-data.js (each subject's
+// `resources` array), so the page itself never needs to change.
+var resourcesGrid = document.getElementById('resourcesGrid');
+if (resourcesGrid && typeof TAG_SUBJECTS !== 'undefined') {
+  resourcesGrid.innerHTML = TAG_SUBJECTS.map(function (s) {
+    var body;
+    if (s.resources && s.resources.length) {
+      body = '<div class="resource-list">' + s.resources.map(function (r) {
+        return '<a class="resource-item" href="' + r.url + '" target="_blank" rel="noopener">' +
+          '<span class="resource-item-title">' + r.title + '</span>' +
+          '<span class="resource-item-type">' + (r.type || 'File') + '</span>' +
+        '</a>';
+      }).join('') + '</div>';
+    } else {
+      body = '<p class="resource-empty">Coming soon for ' + s.name + '. Need something sooner? Ask us on WhatsApp.</p>';
+    }
+    return '<div class="resource-card reveal">' +
+      '<div class="icon"><svg viewBox="0 0 24 24" fill="none">' + s.icon + '</svg></div>' +
+      '<h3>' + s.name + '</h3>' +
+      body +
+      '</div>';
+  }).join('');
+}
+
 // ---------- Scroll reveal ----------
 // Sections fade and rise into place as they enter the viewport — one quiet,
 // consistently-applied pattern rather than a different effect per section.
@@ -75,6 +101,30 @@ if ('IntersectionObserver' in window && statEls.length) {
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
   targets.forEach(function (el) { io.observe(el); });
+})();
+
+// ---------- Video review facades (homepage) ----------
+// Click-to-load YouTube embeds — keeps the page light instead of loading
+// three video players before anyone has actually pressed play.
+(function () {
+  function loadVideo(frame) {
+    var id = frame.getAttribute('data-video-id');
+    if (!id) return;
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+    iframe.title = 'Student video review';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+    frame.innerHTML = '';
+    frame.appendChild(iframe);
+  }
+  document.querySelectorAll('.review-frame[data-video-id]').forEach(function (frame) {
+    frame.addEventListener('click', function () { loadVideo(frame); }, { once: true });
+    frame.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadVideo(frame); }
+    }, { once: true });
+  });
 })();
 
 // ---------- Hero subject search (homepage) ----------

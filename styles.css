@@ -247,7 +247,7 @@ footer h1,footer h2,footer h3,footer .brand span{color:#F5F1F6;}
 .hero-search{
   position:relative;
   display:flex;align-items:center;gap:8px;
-  max-width:460px;margin:30px auto 0;
+  max-width:460px;margin:48px auto 0;
   background:#fff;
   border:1px solid var(--line-strong);
   border-radius:40px;
@@ -413,6 +413,37 @@ footer h1,footer h2,footer h3,footer .brand span{color:#F5F1F6;}
 .stat-label{margin-top:8px;font-size:0.9rem;color:var(--text-muted);}
 .testimonial-author{font-family:var(--serif);font-weight:600;color:var(--plum);font-size:1rem;margin-top:16px;}
 .stats-note{text-align:center;font-size:0.82rem;color:var(--text-muted);margin-top:20px;opacity:0.7;}
+
+/* ---------- Video reviews (YouTube, homepage) ---------- */
+.review-track{
+  display:flex;gap:18px;justify-content:center;flex-wrap:wrap;
+}
+.review-card{flex:0 0 auto;width:216px;}
+.review-frame{
+  position:relative;
+  aspect-ratio:9/16;
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+.review-thumb{width:100%;height:100%;object-fit:cover;display:block;}
+.review-play{
+  position:absolute;inset:0;margin:auto;
+  width:54px;height:54px;border-radius:50%;
+  background:rgba(255,255,255,0.94);color:var(--plum);
+  border:none;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 10px 24px -8px rgba(30,20,35,0.45);
+  transition:transform .15s ease;
+}
+.review-play svg{margin-left:2px;}
+.review-frame:hover .review-play{transform:scale(1.08);}
+.review-caption{margin-top:10px;font-size:0.86rem;color:var(--text-muted);text-align:center;}
+@media (max-width:640px){
+  .review-track{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:8px;}
+  .review-card{width:168px;}
+}
 
 /* ---------- Final CTA band ---------- */
 .cta-band{
@@ -592,6 +623,52 @@ footer h1,footer h2,footer h3,footer .brand span{color:#F5F1F6;}
 .about-cta{text-align:left;margin-top:52px;padding-top:36px;border-top:1px solid var(--line);}
 @media (max-width:900px){.about-points{grid-template-columns:1fr;gap:28px;}}
 @media (max-width:640px){.about-hero{padding:120px 0 10px;}.about-hero h1{font-size:2rem;max-width:none;}}
+
+/* =====================================================================
+   Resources page
+   ===================================================================== */
+.resources-hero{padding:150px 0 36px;text-align:center;}
+.resources-hero h1{font-size:var(--fs-hero);}
+.resources-hero p{margin:14px auto 0;font-size:1.05rem;max-width:56ch;}
+
+.resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.resource-card{
+  border:1px solid var(--line);
+  background:var(--bg-panel);
+  padding:26px 24px;
+  border-radius:4px;
+}
+.resource-card .icon{
+  width:40px;height:40px;border-radius:10px;
+  background:color-mix(in srgb, var(--plum-glow) 20%, transparent);
+  color:var(--plum-glow);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.resource-card .icon svg{width:20px;height:20px;}
+.resource-card h3{font-size:var(--fs-h3);font-weight:600;color:var(--text);margin-bottom:14px;}
+.resource-list{border-top:1px solid var(--line-strong);}
+.resource-item{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 2px;border-bottom:1px solid var(--line);
+  text-decoration:none;transition:color .15s ease;
+}
+.resource-item:hover{color:var(--plum-glow);}
+.resource-item-title{font-size:0.94rem;color:var(--text);}
+.resource-item:hover .resource-item-title{color:var(--plum-glow);}
+.resource-item-type{
+  flex-shrink:0;font-size:0.72rem;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;
+  color:var(--text-muted);border:1px solid var(--line-strong);border-radius:20px;padding:3px 10px;
+}
+.resource-empty{font-size:0.92rem;color:var(--text-muted);}
+.resources-note{text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:26px;}
+
+@media (max-width:900px){.resources-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){
+  .resources-hero{padding:120px 0 28px;}
+  .resources-hero h1{font-size:2rem;}
+  .resources-grid{grid-template-columns:1fr;}
+}
 
 /* =====================================================================
    Page-to-page transition

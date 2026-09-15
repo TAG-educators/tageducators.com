@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — TAG Educators</title>
-<meta name="description" content="About TAG Educators — The Ark Global Educators.">
+<title>Resources — TAG Educators</title>
+<meta name="description" content="Free notes, past papers and revision resources from TAG Educators, organized by subject.">
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="subjects-data.js"></script>
 <script>if(sessionStorage.getItem('tagEntering')==='1'){document.documentElement.classList.add('tag-arriving');}</script>
 </head>
 <body>
@@ -35,36 +36,24 @@
 </header>
 
 <main>
-  <section class="about-hero">
+
+  <section class="resources-hero">
     <div class="wrap">
-      <svg class="arc-mark" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
-      <h1>The Ark Global Educators.</h1>
-      <p class="lede">The full story — how TAG started and who's behind it — is still being written. Here's what's true today.</p>
-
-      <div class="about-points reveal-stagger">
-        <div class="about-point">
-          <h3>Experienced, exam-sat tutors</h3>
-          <p>Every tutor has sat these exact Cambridge papers and currently teaches at an O Level school or A Level college. Two of our faculty are also formally Cambridge certified.</p>
-        </div>
-        <div class="about-point">
-          <h3>Small, tutor-led batches</h3>
-          <p>Classes are kept deliberately small, so every student still gets real attention from their tutor — not just a seat in a crowd.</p>
-        </div>
-        <div class="about-point">
-          <h3>Built for any time zone</h3>
-          <p>Sessions run fully online, so scheduling is built around what works for your family — wherever in the world you are.</p>
-        </div>
-      </div>
-
-      <div class="about-cta reveal">
-        <p>Questions about a tutor, a subject, or how sessions run? Message us directly and we'll answer in person.</p>
-        <div class="btn-row" style="justify-content:flex-start;margin-top:22px;">
-          <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-primary">Message us on WhatsApp</a>
-          <a href="courses.html" class="btn-secondary">Browse courses</a>
-        </div>
-      </div>
+      <svg class="arc-mark" style="margin:0 auto 18px;" viewBox="0 0 44 13" aria-hidden="true"><path d="M2 11 Q22 -3 42 11"/></svg>
+      <h1>Free resources, by subject.</h1>
+      <p>Notes, past papers and revision material from TAG's own tutors, added here as they're ready. Can't find what you need yet? Message us on WhatsApp and we'll help directly.</p>
     </div>
   </section>
+
+  <section style="padding-top:20px;">
+    <div class="wrap">
+      <div class="resources-grid reveal-stagger" id="resourcesGrid">
+        <!-- Rendered by main.js from TAG_SUBJECTS in subjects-data.js -->
+      </div>
+      <p class="resources-note">All resources here are added directly by TAG Educators — this page has no public upload or edit form.</p>
+    </div>
+  </section>
+
 </main>
 
 <footer>

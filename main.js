@@ -127,6 +127,45 @@ if (resourcesGrid && typeof TAG_SUBJECTS !== 'undefined') {
   });
 })();
 
+// ---------- Hero HUD (Grade Climb / Distance Sailed) ----------
+// A playful, scroll-linked pair of readouts echoing a speedometer/odometer —
+// purely decorative motion design, not a claim about any individual student.
+(function () {
+  var hud = document.getElementById('heroHud');
+  var gradeLetter = document.getElementById('hudGradeLetter');
+  var gradeFill = document.getElementById('hudGradeFill');
+  var distanceEl = document.getElementById('hudDistance');
+  if (!hud || !gradeLetter || !gradeFill || !distanceEl) return;
+
+  var GRADES = ['U', 'E', 'D', 'C', 'B', 'A', 'A*'];
+  var MAX_NM = 12;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = docHeight > 0 ? Math.min(1, window.scrollY / docHeight) : 0;
+
+    var gradeProgress = Math.min(1, progress * 1.8);
+    var gradeIndex = Math.min(GRADES.length - 1, Math.floor(gradeProgress * (GRADES.length - 1) + 0.001));
+    gradeLetter.textContent = GRADES[gradeIndex];
+    gradeFill.style.width = (gradeProgress * 100).toFixed(0) + '%';
+
+    distanceEl.textContent = (progress * MAX_NM).toFixed(3);
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  hud.classList.add('visible');
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+})();
+
 // ---------- Hero subject search (homepage) ----------
 // Populates the subject dropdown from the shared dataset; a short pulse on
 // the search bar gives feedback, then hands off to the shared page transition.

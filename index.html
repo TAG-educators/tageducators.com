@@ -38,21 +38,25 @@
   </nav>
 </header>
 
+<div id="voyageTracker" class="voyage-bar"></div>
+
 <main id="top">
 
   <!-- ================= HERO ================= -->
   <section class="hero" id="heroSection">
-    <div class="hero-storm" aria-hidden="true"></div>
-
-    <div class="hero-hud" id="heroHud" aria-hidden="true">
-      <div class="hud-widget hud-grade">
-        <span class="hud-grade-letter" id="hudGradeLetter">U</span>
-        <div class="hud-grade-bar"><div class="hud-grade-fill" id="hudGradeFill"></div></div>
-        <span class="hud-widget-label">Grade Climb</span>
-      </div>
-      <div class="hud-widget hud-distance">
-        <span class="hud-distance-num"><span id="hudDistance">0.000</span> NM</span>
-        <span class="hud-widget-label">Distance Sailed</span>
+    <div class="hero-waves" aria-hidden="true">
+      <svg class="wave-svg wave-back" viewBox="0 0 2400 200" preserveAspectRatio="none">
+        <path d="M0,100 C150,150 350,50 600,100 C850,150 1050,50 1200,100 C1350,150 1550,50 1800,100 C1950,150 2150,50 2400,100 L2400,200 L0,200 Z"/>
+      </svg>
+      <svg class="wave-svg wave-front" viewBox="0 0 2400 200" preserveAspectRatio="none">
+        <path d="M0,120 C200,60 400,160 600,120 C800,60 1000,160 1200,120 C1400,60 1600,160 1800,120 C2000,60 2200,160 2400,120 L2400,200 L0,200 Z"/>
+      </svg>
+      <div class="hero-sail-ark">
+        <svg viewBox="0 0 120 90">
+          <line x1="60" y1="8" x2="60" y2="52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M60 13 L60 46 Q32 40 60 13 Z" fill="currentColor"/>
+          <path d="M10 54 Q60 92 110 54 L98 72 Q60 98 22 72 Z" fill="currentColor"/>
+        </svg>
       </div>
     </div>
 
@@ -62,14 +66,6 @@
 
         <h1 class="hero-split">
           <span class="split-line line-white">Less Sinking.</span>
-          <span class="hero-ark" aria-hidden="true">
-            <span class="hero-ark-glow"></span>
-            <svg viewBox="0 0 120 90" class="hero-ark-svg">
-              <line x1="60" y1="8" x2="60" y2="52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-              <path d="M60 13 L60 46 Q32 40 60 13 Z" fill="currentColor"/>
-              <path d="M10 54 Q60 92 110 54 L98 72 Q60 98 22 72 Z" fill="currentColor"/>
-            </svg>
-          </span>
           <span class="split-line line-grad">More Sailing.</span>
         </h1>
 
@@ -361,6 +357,7 @@
 
 <script src="subjects-data.js"></script>
 <script src="main.js"></script>
+<script src="voyage.js"></script>
 <script src="transitions.js"></script>
 </body>
 </html>

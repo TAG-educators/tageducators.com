@@ -128,44 +128,37 @@ if (resourcesGrid && typeof TAG_SUBJECTS !== 'undefined') {
 })();
 
 // ---------- Hero subject search (homepage) ----------
-// Populates the subject dropdown from the shared dataset; a short pulse on
-// the search bar gives feedback, then hands off to the shared page transition.
+// Matches free-text input against the subject list; a short pulse on the
+// search bar gives feedback, then hands off to the shared page transition.
 (function () {
   var form = document.getElementById('heroSearch');
   if (!form || typeof TAG_SUBJECTS === 'undefined') return;
-  var levelSelect = document.getElementById('heroLevelSelect');
-  var subjectSelect = document.getElementById('heroSubjectSelect');
+  var input = document.getElementById('heroSearchInput');
   var status = document.getElementById('heroSearchStatus');
-
-  if (subjectSelect) {
-    TAG_SUBJECTS.forEach(function (s) {
-      var opt = document.createElement('option');
-      opt.value = s.name;
-      opt.textContent = s.name;
-      subjectSelect.appendChild(opt);
-    });
-  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var subjectName = subjectSelect ? subjectSelect.value : '';
+    var q = (input.value || '').trim().toLowerCase();
+    if (!q) return;
 
     form.classList.remove('pulse');
     void form.offsetWidth; // restart the pulse animation on repeat searches
     form.classList.add('pulse');
 
-    if (!subjectName) {
-      status.textContent = 'Pick a subject to continue.';
-      status.className = 'hero-search-status error';
-      return;
-    }
+    var match = TAG_SUBJECTS.find(function (s) {
+      return s.name.toLowerCase().indexOf(q) !== -1;
+    });
 
-    var level = levelSelect ? levelSelect.value : '';
-    status.textContent = 'Taking you to ' + subjectName + '\u2026';
-    status.className = 'hero-search-status success';
-    var dest = 'subject.html?subject=' + encodeURIComponent(subjectName) + (level ? '&level=' + encodeURIComponent(level) : '');
-    try { sessionStorage.setItem('tagEntering', '1'); } catch (err) {}
-    document.body.classList.add('tag-leaving');
-    setTimeout(function () { window.location.href = dest; }, 280);
+    if (match) {
+      status.textContent = 'Found ' + match.name + ' — taking you there…';
+      status.className = 'hero-search-status success';
+      var dest = 'subject.html?subject=' + encodeURIComponent(match.name);
+      try { sessionStorage.setItem('tagEntering', '1'); } catch (err) {}
+      document.body.classList.add('tag-leaving');
+      setTimeout(function () { window.location.href = dest; }, 280);
+    } else {
+      status.textContent = "We don't teach that yet \u2014 browse all courses below.";
+      status.className = 'hero-search-status error';
+    }
   });
 })();

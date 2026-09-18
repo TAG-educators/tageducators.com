@@ -74,13 +74,15 @@ button{font-family:inherit;}
 a:hover .go-arc,button:hover .go-arc{transform:translateX(3px);}
 
 /* ---------- Nav ---------- */
-header{
+.site-topbar{
   position:sticky;
   top:0;
+  z-index:50;
+}
+header{
   background:rgba(21,12,27,0.85);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line-strong);
-  z-index:50;
 }
 nav{
   display:flex;
@@ -273,16 +275,28 @@ footer{
 }
 
 /* ---------- Wave scene (Ark sailing through the hero) ---------- */
+/* Each layer is two identical SVG tiles placed side by side (width:200%
+   overall, each tile 50%); animating the layer exactly half its own width
+   is mathematically guaranteed seamless, since tile 2 is pixel-identical
+   to tile 1 — no reliance on a single path's internal periodicity. */
 .hero-waves{
   position:absolute;left:0;right:0;bottom:0;height:150px;
   overflow:hidden;pointer-events:none;z-index:0;
 }
-.wave-svg{position:absolute;bottom:0;left:0;width:200%;height:100%;}
-.wave-back{fill:color-mix(in srgb, var(--plum) 60%, var(--bg));opacity:0.55;}
-.wave-front{fill:color-mix(in srgb, var(--plum-light) 45%, var(--bg));opacity:0.9;}
+.wave-layer{
+  position:absolute;bottom:0;left:0;
+  width:200%;height:100%;
+  display:flex;
+  will-change:transform;
+}
+.wave-layer svg{width:50%;height:100%;flex-shrink:0;display:block;}
+.wave-back svg{fill:color-mix(in srgb, var(--plum) 65%, var(--bg));}
+.wave-back{opacity:0.6;}
+.wave-front svg{fill:color-mix(in srgb, var(--plum-light) 50%, var(--bg));}
+.wave-front{opacity:0.95;}
 @media (prefers-reduced-motion: no-preference){
-  .wave-back{animation:waveDrift 16s linear infinite;}
-  .wave-front{animation:waveDrift 9s linear infinite reverse;}
+  .wave-back{animation:waveDrift 18s linear infinite;}
+  .wave-front{animation:waveDrift 10s linear infinite;}
 }
 @keyframes waveDrift{
   from{transform:translateX(0);}
@@ -333,26 +347,21 @@ footer{
   max-width:460px;margin:32px auto 0;
   background:#FBF8FC;
   border:1px solid rgba(0,0,0,0.06);
-  border-radius:14px;
-  padding:8px;
+  border-radius:40px;
+  padding:6px 6px 6px 22px;
   box-shadow:0 20px 40px -18px rgba(0,0,0,0.55);
   transition:box-shadow .2s ease;
 }
 .hero-search:focus-within{
   box-shadow:0 20px 40px -18px rgba(0,0,0,0.55), 0 0 0 4px color-mix(in srgb, var(--plum-glow) 35%, transparent);
 }
-.hero-search select{
-  flex:1;min-width:0;border:none;outline:none;background:transparent;
-  font-family:var(--sans);font-size:0.93rem;color:var(--ink);padding:11px 10px;
-  border-right:1px solid rgba(0,0,0,0.08);
-  appearance:none;-webkit-appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236A6374' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 10px center;
-  padding-right:24px;cursor:pointer;
+.hero-search input{
+  flex:1;border:none;outline:none;background:transparent;
+  font-family:var(--sans);font-size:0.97rem;color:var(--ink);padding:11px 0;
 }
-.hero-search select:last-of-type{border-right:none;}
+.hero-search input::placeholder{color:var(--ink-muted);}
 .hero-search button{
-  flex-shrink:0;width:40px;height:40px;border-radius:10px;border:none;
+  flex-shrink:0;width:40px;height:40px;border-radius:50%;border:none;
   background:linear-gradient(135deg, var(--plum), var(--plum-light));color:#fff;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:filter .15s ease;
@@ -366,11 +375,6 @@ footer{
 .hero-search-status{margin:12px auto 0;max-width:none;font-size:0.87rem;min-height:1.3em;text-align:center;transition:opacity .2s ease;}
 .hero-search-status.success{color:var(--plum-glow);}
 .hero-search-status.error{color:var(--danger);}
-@media (max-width:480px){
-  .hero-search{flex-wrap:wrap;}
-  .hero-search select{flex:1 1 100%;border-right:none;border-bottom:1px solid rgba(0,0,0,0.08);}
-  .hero-search button{margin-left:auto;}
-}
 
 /* ---------- Orbit strip (subjects, homepage) ---------- */
 #orbit{padding-top:64px;padding-bottom:64px;}

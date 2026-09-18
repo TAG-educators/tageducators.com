@@ -18,6 +18,7 @@
   Ask us on WhatsApp
 </a>
 
+<div class="site-topbar">
 <header>
   <nav>
     <a href="#top" class="brand">
@@ -39,18 +40,21 @@
 </header>
 
 <div id="voyageTracker" class="voyage-bar"></div>
+</div>
 
 <main id="top">
 
   <!-- ================= HERO ================= -->
   <section class="hero" id="heroSection">
     <div class="hero-waves" aria-hidden="true">
-      <svg class="wave-svg wave-back" viewBox="0 0 2400 200" preserveAspectRatio="none">
-        <path d="M0,100 C150,150 350,50 600,100 C850,150 1050,50 1200,100 C1350,150 1550,50 1800,100 C1950,150 2150,50 2400,100 L2400,200 L0,200 Z"/>
-      </svg>
-      <svg class="wave-svg wave-front" viewBox="0 0 2400 200" preserveAspectRatio="none">
-        <path d="M0,120 C200,60 400,160 600,120 C800,60 1000,160 1200,120 C1400,60 1600,160 1800,120 C2000,60 2200,160 2400,120 L2400,200 L0,200 Z"/>
-      </svg>
+      <div class="wave-layer wave-back">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0,100 C150,150 350,50 600,100 C850,150 1050,50 1200,100 L1200,200 L0,200 Z"/></svg>
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0,100 C150,150 350,50 600,100 C850,150 1050,50 1200,100 L1200,200 L0,200 Z"/></svg>
+      </div>
+      <div class="wave-layer wave-front">
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0,120 C200,60 400,160 600,120 C800,60 1000,160 1200,120 L1200,200 L0,200 Z"/></svg>
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="M0,120 C200,60 400,160 600,120 C800,60 1000,160 1200,120 L1200,200 L0,200 Z"/></svg>
+      </div>
       <div class="hero-sail-ark">
         <svg viewBox="0 0 120 90">
           <line x1="60" y1="8" x2="60" y2="52" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
@@ -78,25 +82,13 @@
           <span class="dot-sep">&middot;</span>
           <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>2 Cambridge-certified tutors</span>
         </div>
-        <form class="hero-search" id="heroSearch" role="search" aria-label="Find a subject">
-          <select id="heroLevelSelect" aria-label="Select level">
-            <option value="">Select Level</option>
-            <option value="O Level">O Level</option>
-            <option value="A Level">A Level</option>
-            <option value="IGCSE">IGCSE</option>
-          </select>
-          <select id="heroSubjectSelect" aria-label="Select subject">
-            <option value="">Select Subject</option>
-          </select>
-          <button type="submit" aria-label="Go">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <form class="hero-search" id="heroSearch" role="search" aria-label="Search a subject">
+          <input type="text" id="heroSearchInput" placeholder="Search your subject… e.g. Physics, Accounts" autocomplete="off">
+          <button type="submit" aria-label="Search">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
         </form>
         <p class="hero-search-status" id="heroSearchStatus" aria-live="polite"></p>
-        <div class="btn-row">
-          <a href="courses.html" class="btn-primary">View courses</a>
-          <a href="https://wa.me/923162165779" target="_blank" rel="noopener" class="btn-secondary">Message on WhatsApp</a>
-        </div>
       </div>
     </div>
   </section>
